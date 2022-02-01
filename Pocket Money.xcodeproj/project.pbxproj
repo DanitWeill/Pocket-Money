@@ -1,0 +1,626 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A527A91E0400C440A1 /* AppDelegate.swift */; };
+		844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A727A91E0400C440A1 /* SceneDelegate.swift */; };
+		844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A927A91E0400C440A1 /* ViewController.swift */; };
+		844B13AD27A91E0400C440A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B13AB27A91E0400C440A1 /* Main.storyboard */; };
+		844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */; };
+		844B13B227A91E0500C440A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B127A91E0500C440A1 /* Assets.xcassets */; };
+		844B13B527A91E0500C440A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */; };
+		844B13C027A91E0500C440A1 /* Pocket_MoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */; };
+		844B13CA27A91E0500C440A1 /* Pocket_MoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */; };
+		844B13CC27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		844B13BC27A91E0500C440A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 844B139A27A91E0400C440A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 844B13A127A91E0400C440A1;
+			remoteInfo = "Pocket Money";
+		};
+		844B13C627A91E0500C440A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 844B139A27A91E0400C440A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 844B13A127A91E0400C440A1;
+			remoteInfo = "Pocket Money";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		844B13A227A91E0400C440A1 /* Pocket Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		844B13A527A91E0400C440A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		844B13A727A91E0400C440A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		844B13A927A91E0400C440A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		844B13AC27A91E0400C440A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		844B13AF27A91E0400C440A1 /* Pocket_Money.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Money.xcdatamodel; sourceTree = "<group>"; };
+		844B13B127A91E0500C440A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		844B13B427A91E0500C440A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		844B13B627A91E0500C440A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket MoneyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyTests.swift; sourceTree = "<group>"; };
+		844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket MoneyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyUITests.swift; sourceTree = "<group>"; };
+		844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		844B139F27A91E0400C440A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13B827A91E0500C440A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13C227A91E0500C440A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		844B139927A91E0400C440A1 = {
+			isa = PBXGroup;
+			children = (
+				844B13A427A91E0400C440A1 /* Pocket Money */,
+				844B13BE27A91E0500C440A1 /* Pocket MoneyTests */,
+				844B13C827A91E0500C440A1 /* Pocket MoneyUITests */,
+				844B13A327A91E0400C440A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		844B13A327A91E0400C440A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				844B13A227A91E0400C440A1 /* Pocket Money.app */,
+				844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */,
+				844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		844B13A427A91E0400C440A1 /* Pocket Money */ = {
+			isa = PBXGroup;
+			children = (
+				844B13A527A91E0400C440A1 /* AppDelegate.swift */,
+				844B13A727A91E0400C440A1 /* SceneDelegate.swift */,
+				844B13A927A91E0400C440A1 /* ViewController.swift */,
+				844B13AB27A91E0400C440A1 /* Main.storyboard */,
+				844B13B127A91E0500C440A1 /* Assets.xcassets */,
+				844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */,
+				844B13B627A91E0500C440A1 /* Info.plist */,
+				844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */,
+			);
+			path = "Pocket Money";
+			sourceTree = "<group>";
+		};
+		844B13BE27A91E0500C440A1 /* Pocket MoneyTests */ = {
+			isa = PBXGroup;
+			children = (
+				844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */,
+			);
+			path = "Pocket MoneyTests";
+			sourceTree = "<group>";
+		};
+		844B13C827A91E0500C440A1 /* Pocket MoneyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */,
+				844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */,
+			);
+			path = "Pocket MoneyUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		844B13A127A91E0400C440A1 /* Pocket Money */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 844B13CF27A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket Money" */;
+			buildPhases = (
+				844B139E27A91E0400C440A1 /* Sources */,
+				844B139F27A91E0400C440A1 /* Frameworks */,
+				844B13A027A91E0400C440A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pocket Money";
+			productName = "Pocket Money";
+			productReference = 844B13A227A91E0400C440A1 /* Pocket Money.app */;
+			productType = "com.apple.product-type.application";
+		};
+		844B13BA27A91E0500C440A1 /* Pocket MoneyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 844B13D227A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyTests" */;
+			buildPhases = (
+				844B13B727A91E0500C440A1 /* Sources */,
+				844B13B827A91E0500C440A1 /* Frameworks */,
+				844B13B927A91E0500C440A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				844B13BD27A91E0500C440A1 /* PBXTargetDependency */,
+			);
+			name = "Pocket MoneyTests";
+			productName = "Pocket MoneyTests";
+			productReference = 844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		844B13C427A91E0500C440A1 /* Pocket MoneyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 844B13D527A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyUITests" */;
+			buildPhases = (
+				844B13C127A91E0500C440A1 /* Sources */,
+				844B13C227A91E0500C440A1 /* Frameworks */,
+				844B13C327A91E0500C440A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				844B13C727A91E0500C440A1 /* PBXTargetDependency */,
+			);
+			name = "Pocket MoneyUITests";
+			productName = "Pocket MoneyUITests";
+			productReference = 844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		844B139A27A91E0400C440A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					844B13A127A91E0400C440A1 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					844B13BA27A91E0500C440A1 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 844B13A127A91E0400C440A1;
+					};
+					844B13C427A91E0500C440A1 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 844B13A127A91E0400C440A1;
+					};
+				};
+			};
+			buildConfigurationList = 844B139D27A91E0400C440A1 /* Build configuration list for PBXProject "Pocket Money" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 844B139927A91E0400C440A1;
+			productRefGroup = 844B13A327A91E0400C440A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				844B13A127A91E0400C440A1 /* Pocket Money */,
+				844B13BA27A91E0500C440A1 /* Pocket MoneyTests */,
+				844B13C427A91E0500C440A1 /* Pocket MoneyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		844B13A027A91E0400C440A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844B13B527A91E0500C440A1 /* LaunchScreen.storyboard in Resources */,
+				844B13B227A91E0500C440A1 /* Assets.xcassets in Resources */,
+				844B13AD27A91E0400C440A1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13B927A91E0500C440A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13C327A91E0500C440A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		844B139E27A91E0400C440A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */,
+				844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */,
+				844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */,
+				844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13B727A91E0500C440A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844B13C027A91E0500C440A1 /* Pocket_MoneyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		844B13C127A91E0500C440A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844B13CA27A91E0500C440A1 /* Pocket_MoneyUITests.swift in Sources */,
+				844B13CC27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		844B13BD27A91E0500C440A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 844B13A127A91E0400C440A1 /* Pocket Money */;
+			targetProxy = 844B13BC27A91E0500C440A1 /* PBXContainerItemProxy */;
+		};
+		844B13C727A91E0500C440A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 844B13A127A91E0400C440A1 /* Pocket Money */;
+			targetProxy = 844B13C627A91E0500C440A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		844B13AB27A91E0400C440A1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				844B13AC27A91E0400C440A1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				844B13B427A91E0500C440A1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		844B13CD27A91E0600C440A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		844B13CE27A91E0600C440A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		844B13D027A91E0600C440A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pocket Money/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-Money";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		844B13D127A91E0600C440A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pocket Money/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-Money";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		844B13D327A91E0600C440A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Money.app/Pocket Money";
+			};
+			name = Debug;
+		};
+		844B13D427A91E0600C440A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Money.app/Pocket Money";
+			};
+			name = Release;
+		};
+		844B13D627A91E0600C440A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pocket Money";
+			};
+			name = Debug;
+		};
+		844B13D727A91E0600C440A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53M7K278XT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pocket Money";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		844B139D27A91E0400C440A1 /* Build configuration list for PBXProject "Pocket Money" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				844B13CD27A91E0600C440A1 /* Debug */,
+				844B13CE27A91E0600C440A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		844B13CF27A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket Money" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				844B13D027A91E0600C440A1 /* Debug */,
+				844B13D127A91E0600C440A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		844B13D227A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				844B13D327A91E0600C440A1 /* Debug */,
+				844B13D427A91E0600C440A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		844B13D527A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				844B13D627A91E0600C440A1 /* Debug */,
+				844B13D727A91E0600C440A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				844B13AF27A91E0400C440A1 /* Pocket_Money.xcdatamodel */,
+			);
+			currentVersion = 844B13AF27A91E0400C440A1 /* Pocket_Money.xcdatamodel */;
+			path = Pocket_Money.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 844B139A27A91E0400C440A1 /* Project object */;
+}
