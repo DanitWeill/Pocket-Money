@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370D384FF6991EE459744C19 /* Pods_Pocket_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */; };
 		844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A527A91E0400C440A1 /* AppDelegate.swift */; };
 		844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A727A91E0400C440A1 /* SceneDelegate.swift */; };
 		844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A927A91E0400C440A1 /* ViewController.swift */; };
@@ -14,30 +15,27 @@
 		844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */; };
 		844B13B227A91E0500C440A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B127A91E0500C440A1 /* Assets.xcassets */; };
 		844B13B527A91E0500C440A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */; };
-		844B13C027A91E0500C440A1 /* Pocket_MoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */; };
-		844B13CA27A91E0500C440A1 /* Pocket_MoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */; };
-		844B13CC27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */; };
+		844B13D927A9231D00C440A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 844B13D827A9231D00C440A1 /* GoogleService-Info.plist */; };
+		844B13DC27A9261C00C440A1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 844B13DB27A9261C00C440A1 /* FirebaseAuth */; };
+		844B13DE27A9261C00C440A1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 844B13DD27A9261C00C440A1 /* FirebaseFirestore */; };
+		844B13E227A929A600C440A1 /* SigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E127A929A600C440A1 /* SigninVC.swift */; };
+		844B13E427A9378800C440A1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E327A9378800C440A1 /* LoginVC.swift */; };
+		844B13E627A93DF300C440A1 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E527A93DF300C440A1 /* MainVC.swift */; };
+		844B13E827A93F7B00C440A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E727A93F7B00C440A1 /* User.swift */; };
+		844B13EC27AA74EF00C440A1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13EA27AA74EF00C440A1 /* UserCell.swift */; };
+		844B13ED27AA74EF00C440A1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844B13EB27AA74EF00C440A1 /* UserCell.xib */; };
+		844B13F127ABDDD800C440A1 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */; };
+		8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */; };
+		84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8474327C4D07C007138F0 /* AddByTimeVC.swift */; };
+		84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D027B90B2700952350 /* UserDetailsCell.swift */; };
+		84C616D327B90B2700952350 /* UserDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C616D127B90B2700952350 /* UserDetailsCell.xib */; };
+		84C616D527B9185A00952350 /* DateAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D427B9185A00952350 /* DateAmount.swift */; };
+		84C616D727BE365400952350 /* addUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D627BE365400952350 /* addUserVC.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		844B13BC27A91E0500C440A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 844B139A27A91E0400C440A1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 844B13A127A91E0400C440A1;
-			remoteInfo = "Pocket Money";
-		};
-		844B13C627A91E0500C440A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 844B139A27A91E0400C440A1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 844B13A127A91E0400C440A1;
-			remoteInfo = "Pocket Money";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		844B13A227A91E0400C440A1 /* Pocket Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		250254A8FF20916B9E1A68DC /* Pods-Pocket Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Money.release.xcconfig"; path = "Target Support Files/Pods-Pocket Money/Pods-Pocket Money.release.xcconfig"; sourceTree = "<group>"; };
+		3BEBDF27D7B93F07186AA918 /* Pods-Pocket Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Money.debug.xcconfig"; path = "Target Support Files/Pods-Pocket Money/Pods-Pocket Money.debug.xcconfig"; sourceTree = "<group>"; };
 		844B13A527A91E0400C440A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844B13A727A91E0400C440A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		844B13A927A91E0400C440A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,11 +44,22 @@
 		844B13B127A91E0500C440A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		844B13B427A91E0500C440A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		844B13B627A91E0500C440A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket MoneyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyTests.swift; sourceTree = "<group>"; };
-		844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pocket MoneyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyUITests.swift; sourceTree = "<group>"; };
-		844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pocket_MoneyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		844B13D827A9231D00C440A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		844B13E127A929A600C440A1 /* SigninVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninVC.swift; sourceTree = "<group>"; };
+		844B13E327A9378800C440A1 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		844B13E527A93DF300C440A1 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		844B13E727A93F7B00C440A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		844B13EA27AA74EF00C440A1 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		844B13EB27AA74EF00C440A1 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
+		8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyToUserVC.swift; sourceTree = "<group>"; };
+		84A8474327C4D07C007138F0 /* AddByTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddByTimeVC.swift; sourceTree = "<group>"; };
+		84A8474527C563CE007138F0 /* Pocket Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C616D027B90B2700952350 /* UserDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCell.swift; sourceTree = "<group>"; };
+		84C616D127B90B2700952350 /* UserDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsCell.xib; sourceTree = "<group>"; };
+		84C616D427B9185A00952350 /* DateAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAmount.swift; sourceTree = "<group>"; };
+		84C616D627BE365400952350 /* addUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addUserVC.swift; sourceTree = "<group>"; };
+		9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pocket_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,44 +67,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13B827A91E0500C440A1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13C227A91E0500C440A1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				844B13DC27A9261C00C440A1 /* FirebaseAuth in Frameworks */,
+				844B13DE27A9261C00C440A1 /* FirebaseFirestore in Frameworks */,
+				370D384FF6991EE459744C19 /* Pods_Pocket_Money.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D1844DAAAF777A735F04783 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3BEBDF27D7B93F07186AA918 /* Pods-Pocket Money.debug.xcconfig */,
+				250254A8FF20916B9E1A68DC /* Pods-Pocket Money.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		844B139927A91E0400C440A1 = {
 			isa = PBXGroup;
 			children = (
 				844B13A427A91E0400C440A1 /* Pocket Money */,
-				844B13BE27A91E0500C440A1 /* Pocket MoneyTests */,
-				844B13C827A91E0500C440A1 /* Pocket MoneyUITests */,
-				844B13A327A91E0400C440A1 /* Products */,
+				7D1844DAAAF777A735F04783 /* Pods */,
+				84A8474527C563CE007138F0 /* Pocket Money.app */,
+				920E6599A50466F333348150 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		844B13A327A91E0400C440A1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				844B13A227A91E0400C440A1 /* Pocket Money.app */,
-				844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */,
-				844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		844B13A427A91E0400C440A1 /* Pocket Money */ = {
@@ -103,31 +100,60 @@
 			children = (
 				844B13A527A91E0400C440A1 /* AppDelegate.swift */,
 				844B13A727A91E0400C440A1 /* SceneDelegate.swift */,
-				844B13A927A91E0400C440A1 /* ViewController.swift */,
-				844B13AB27A91E0400C440A1 /* Main.storyboard */,
+				844B13E927A93F8200C440A1 /* Model */,
+				844B13DF27A9294E00C440A1 /* View */,
+				844B13E027A9296F00C440A1 /* Controller */,
 				844B13B127A91E0500C440A1 /* Assets.xcassets */,
 				844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */,
 				844B13B627A91E0500C440A1 /* Info.plist */,
+				844B13D827A9231D00C440A1 /* GoogleService-Info.plist */,
 				844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */,
 			);
 			path = "Pocket Money";
 			sourceTree = "<group>";
 		};
-		844B13BE27A91E0500C440A1 /* Pocket MoneyTests */ = {
+		844B13DF27A9294E00C440A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				844B13BF27A91E0500C440A1 /* Pocket_MoneyTests.swift */,
+				844B13AB27A91E0400C440A1 /* Main.storyboard */,
+				844B13EA27AA74EF00C440A1 /* UserCell.swift */,
+				844B13EB27AA74EF00C440A1 /* UserCell.xib */,
+				84C616D027B90B2700952350 /* UserDetailsCell.swift */,
+				84C616D127B90B2700952350 /* UserDetailsCell.xib */,
 			);
-			path = "Pocket MoneyTests";
+			path = View;
 			sourceTree = "<group>";
 		};
-		844B13C827A91E0500C440A1 /* Pocket MoneyUITests */ = {
+		844B13E027A9296F00C440A1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				844B13C927A91E0500C440A1 /* Pocket_MoneyUITests.swift */,
-				844B13CB27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift */,
+				844B13A927A91E0400C440A1 /* ViewController.swift */,
+				844B13E127A929A600C440A1 /* SigninVC.swift */,
+				844B13E327A9378800C440A1 /* LoginVC.swift */,
+				844B13E527A93DF300C440A1 /* MainVC.swift */,
+				84C616D627BE365400952350 /* addUserVC.swift */,
+				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
+				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
+				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
 			);
-			path = "Pocket MoneyUITests";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		844B13E927A93F8200C440A1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				844B13E727A93F7B00C440A1 /* User.swift */,
+				84C616D427B9185A00952350 /* DateAmount.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		920E6599A50466F333348150 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,54 +163,24 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 844B13CF27A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket Money" */;
 			buildPhases = (
+				5A05583B6C6F7C391778A75D /* [CP] Check Pods Manifest.lock */,
 				844B139E27A91E0400C440A1 /* Sources */,
 				844B139F27A91E0400C440A1 /* Frameworks */,
 				844B13A027A91E0400C440A1 /* Resources */,
+				A1E181E189E57656A5C41873 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Pocket Money";
+			packageProductDependencies = (
+				844B13DB27A9261C00C440A1 /* FirebaseAuth */,
+				844B13DD27A9261C00C440A1 /* FirebaseFirestore */,
+			);
 			productName = "Pocket Money";
-			productReference = 844B13A227A91E0400C440A1 /* Pocket Money.app */;
+			productReference = 84A8474527C563CE007138F0 /* Pocket Money.app */;
 			productType = "com.apple.product-type.application";
-		};
-		844B13BA27A91E0500C440A1 /* Pocket MoneyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 844B13D227A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyTests" */;
-			buildPhases = (
-				844B13B727A91E0500C440A1 /* Sources */,
-				844B13B827A91E0500C440A1 /* Frameworks */,
-				844B13B927A91E0500C440A1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				844B13BD27A91E0500C440A1 /* PBXTargetDependency */,
-			);
-			name = "Pocket MoneyTests";
-			productName = "Pocket MoneyTests";
-			productReference = 844B13BB27A91E0500C440A1 /* Pocket MoneyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		844B13C427A91E0500C440A1 /* Pocket MoneyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 844B13D527A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyUITests" */;
-			buildPhases = (
-				844B13C127A91E0500C440A1 /* Sources */,
-				844B13C227A91E0500C440A1 /* Frameworks */,
-				844B13C327A91E0500C440A1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				844B13C727A91E0500C440A1 /* PBXTargetDependency */,
-			);
-			name = "Pocket MoneyUITests";
-			productName = "Pocket MoneyUITests";
-			productReference = 844B13C527A91E0500C440A1 /* Pocket MoneyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -199,14 +195,6 @@
 					844B13A127A91E0400C440A1 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					844B13BA27A91E0500C440A1 = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 844B13A127A91E0400C440A1;
-					};
-					844B13C427A91E0500C440A1 = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 844B13A127A91E0400C440A1;
-					};
 				};
 			};
 			buildConfigurationList = 844B139D27A91E0400C440A1 /* Build configuration list for PBXProject "Pocket Money" */;
@@ -218,13 +206,14 @@
 				Base,
 			);
 			mainGroup = 844B139927A91E0400C440A1;
-			productRefGroup = 844B13A327A91E0400C440A1 /* Products */;
+			packageReferences = (
+				844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 844B139927A91E0400C440A1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				844B13A127A91E0400C440A1 /* Pocket Money */,
-				844B13BA27A91E0500C440A1 /* Pocket MoneyTests */,
-				844B13C427A91E0500C440A1 /* Pocket MoneyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -235,26 +224,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				844B13B527A91E0500C440A1 /* LaunchScreen.storyboard in Resources */,
+				844B13D927A9231D00C440A1 /* GoogleService-Info.plist in Resources */,
 				844B13B227A91E0500C440A1 /* Assets.xcassets in Resources */,
 				844B13AD27A91E0400C440A1 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13B927A91E0500C440A1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13C327A91E0500C440A1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				844B13ED27AA74EF00C440A1 /* UserCell.xib in Resources */,
+				84C616D327B90B2700952350 /* UserDetailsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A05583B6C6F7C391778A75D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pocket Money-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1E181E189E57656A5C41873 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pocket Money/Pods-Pocket Money-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pocket Money/Pods-Pocket Money-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pocket Money/Pods-Pocket Money-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		844B139E27A91E0400C440A1 /* Sources */ = {
@@ -262,43 +282,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */,
+				844B13E227A929A600C440A1 /* SigninVC.swift in Sources */,
+				844B13E427A9378800C440A1 /* LoginVC.swift in Sources */,
 				844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */,
+				844B13E827A93F7B00C440A1 /* User.swift in Sources */,
+				844B13EC27AA74EF00C440A1 /* UserCell.swift in Sources */,
 				844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */,
+				844B13F127ABDDD800C440A1 /* UserDetailsVC.swift in Sources */,
 				844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13B727A91E0500C440A1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				844B13C027A91E0500C440A1 /* Pocket_MoneyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		844B13C127A91E0500C440A1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				844B13CA27A91E0500C440A1 /* Pocket_MoneyUITests.swift in Sources */,
-				844B13CC27A91E0500C440A1 /* Pocket_MoneyUITestsLaunchTests.swift in Sources */,
+				84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */,
+				844B13E627A93DF300C440A1 /* MainVC.swift in Sources */,
+				84C616D727BE365400952350 /* addUserVC.swift in Sources */,
+				84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */,
+				84C616D527B9185A00952350 /* DateAmount.swift in Sources */,
+				8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		844B13BD27A91E0500C440A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 844B13A127A91E0400C440A1 /* Pocket Money */;
-			targetProxy = 844B13BC27A91E0500C440A1 /* PBXContainerItemProxy */;
-		};
-		844B13C727A91E0500C440A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 844B13A127A91E0400C440A1 /* Pocket Money */;
-			targetProxy = 844B13C627A91E0500C440A1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		844B13AB27A91E0400C440A1 /* Main.storyboard */ = {
@@ -438,6 +439,7 @@
 		};
 		844B13D027A91E0600C440A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BEBDF27D7B93F07186AA918 /* Pods-Pocket Money.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -466,6 +468,7 @@
 		};
 		844B13D127A91E0600C440A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 250254A8FF20916B9E1A68DC /* Pods-Pocket Money.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -492,82 +495,6 @@
 			};
 			name = Release;
 		};
-		844B13D327A91E0600C440A1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53M7K278XT;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Money.app/Pocket Money";
-			};
-			name = Debug;
-		};
-		844B13D427A91E0600C440A1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53M7K278XT;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pocket Money.app/Pocket Money";
-			};
-			name = Release;
-		};
-		844B13D627A91E0600C440A1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53M7K278XT;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Pocket Money";
-			};
-			name = Debug;
-		};
-		844B13D727A91E0600C440A1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53M7K278XT;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Danit-Weill.Pocket-MoneyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Pocket Money";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -589,25 +516,31 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		844B13D227A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				844B13D327A91E0600C440A1 /* Debug */,
-				844B13D427A91E0600C440A1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		844B13D527A91E0600C440A1 /* Build configuration list for PBXNativeTarget "Pocket MoneyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				844B13D627A91E0600C440A1 /* Debug */,
-				844B13D727A91E0600C440A1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		844B13DB27A9261C00C440A1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		844B13DD27A9261C00C440A1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */ = {
