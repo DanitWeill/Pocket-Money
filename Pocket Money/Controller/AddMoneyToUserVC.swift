@@ -14,6 +14,7 @@ class AddMoneyToUserVC: UIViewController {
     @IBOutlet weak var nameLabel2: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var poppingAddedLabel: UILabel!
     
     var nameToPass: String = ""
     var sumToPass: String = ""
@@ -27,6 +28,8 @@ class AddMoneyToUserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
+
         db.collection("users").document(nameToPass).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
@@ -38,14 +41,16 @@ class AddMoneyToUserVC: UIViewController {
             }
         }
         
-        nameLabel.text = nameToPass
-        nameLabel2.text = nameToPass
+        nameLabel.text = "Add money to  \(nameToPass)  pocket"
+        nameLabel2.text = "\(nameToPass)  now has"
         sumLabel.text = sumToPass
         
-        
+        amountTextField.keyboardType = .numberPad
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
+        
+
         //UI
         let sum = Int(sumToPass)
         let amountToAdd = Int(amountTextField.text!)
@@ -127,13 +132,25 @@ class AddMoneyToUserVC: UIViewController {
               
                 }
         }
+        view.endEditing(true)
+
+//        poppingAddedLabel.ti
         
-        
+    }
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
     }
     
     func updateUISum(sum: Int) {
         sumLabel.text = String(sum)
     }
   
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let addByTimeVC = segue.destination as? AddByTimeVC {
+    addByTimeVC.nameToPass = nameToPass
+         }
+    }
 }
 

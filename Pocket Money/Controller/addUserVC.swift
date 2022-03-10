@@ -16,13 +16,21 @@ class addUserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
+
+        
         textFieldName.placeholder = "New user name"
         textFieldSum.keyboardType = .alphabet
         
         textFieldSum.placeholder = "New amount of money (numbers only)"
         textFieldSum.keyboardType = .numberPad
+        
     }
     
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
+    }
     
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
         

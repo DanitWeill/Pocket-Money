@@ -133,8 +133,8 @@
 				844B13E527A93DF300C440A1 /* MainVC.swift */,
 				84C616D627BE365400952350 /* addUserVC.swift */,
 				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
-				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
+				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

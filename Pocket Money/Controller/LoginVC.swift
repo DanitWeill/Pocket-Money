@@ -14,7 +14,17 @@ class LoginVC: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
+
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
+    }
     
     @IBAction func loginButton(_ sender: UIButton) {
     
