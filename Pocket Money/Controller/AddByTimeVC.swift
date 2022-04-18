@@ -12,7 +12,8 @@ class AddByTimeVC: UIViewController {
     
     
     
-    @IBOutlet weak var amountTextfield: UITextField!
+    @IBOutlet weak var constantAmountToAddTextfield: UITextField!
+    @IBOutlet weak var swicher: UISwitch!
     
     
     @IBOutlet weak var sunButton: UIButton!
@@ -33,10 +34,12 @@ class AddByTimeVC: UIViewController {
     let db = Firestore.firestore()
     var dateToBeginString = String()
     var dateToBeginDate = Date()
+    var addEvery = 0
+    var finalAmountToAdd = 0
     
     var nameToPass: String = ""
-//    var dayToBegin: String = "sunday"
-//    var dayUserChose: Int = 1
+    //    var dayToBegin: String = "sunday"
+    //    var dayUserChose: Int = 1
     var currentWeekday: Int = 1
     var daysToAdd = 0
     let addOneDay = Date.now.addingTimeInterval(86400)
@@ -49,7 +52,28 @@ class AddByTimeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+        print("tapped")
+        view.endEditing(true)
+    }
+    
+    func setConstantAmountToAdd(){
+        db.collection("users").document(nameToPass).updateData([
+            "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0")])
+        { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                //what will happen if the name and sum are nil
+            } else {
+                print("setConstantAmountToAdd successfully written!")
+                print(self.constantAmountToAddTextfield.text)
+            }
+            
+        }
         
     }
     
@@ -64,17 +88,16 @@ class AddByTimeVC: UIViewController {
         
         dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
         dateToBeginString = formatter.string(from: dateToBeginDate)
-        
+        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
         
         db.collection("users").document(nameToPass).updateData([
-            "date_to_begin": dateToBeginString])
+            "day_to_begin": dayToBegin, "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
         { err in
             if let err = err {
                 print("Error writing document: \(err)")
                 //what will happen if the name and sum are nil
             } else {
-                print("Document successfully written!")
-                print(self.currentWeekday)
+                print("setDateToBegin successfully written!")
                 
             }
         }
@@ -83,44 +106,20 @@ class AddByTimeVC: UIViewController {
     
     
     
-    func whenToUpdateMoney() {
+    func setAddEvery() {
         
-        db.collection("useres").document(nameToPass).getDocument { doc, err in
-            if let err = err{
-                print(err.localizedDescription)
-            }else{
-                
-                if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Int
-                    
-//                    let updateSum =
-                    
-                }
+        db.collection("users").document(nameToPass).updateData([
+            "add_every": addEvery])
+        { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                //what will happen if the name and sum are nil
+            } else {
+                print("setAddEvery successfully written!")
                 
             }
         }
-        
-        var dateToAdd: [Bool] = []
-        for i in dateToAdd{
-            
-        }
-        if dayButton.isSelected == true {
-//            //            add 86400 (sec in 1 day)
-//            let addOneDay = Date.now.addingTimeInterval(86400)
-//
-//            print(addOneDay)
-//            print("================")
-        } else if weekButton.isSelected == true {
-            let addOneWeek = Date.now.addingTimeInterval(604800)
-        } else if monthButton.isSelected == true {
-            let addOneMonth = Date.now.addingTimeInterval(2419200)
-            
-        }
-        //        db.collection("users").document(nameToPass).collection("history").addDocument(data: ["dateToAdd": dateToAdd])
-        
-        db.collection("users").document(nameToPass).collection("history").addDocument(data: ["When_To_Repeat": dateToAdd])
     }
-    
     
     
     @IBAction func sunButton(_ sender: UIButton) {
@@ -169,7 +168,7 @@ class AddByTimeVC: UIViewController {
             friButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-                        
+            
             
             if currentWeekday > 2 {
                 daysToAdd = (7 - currentWeekday) + 2
@@ -327,17 +326,23 @@ class AddByTimeVC: UIViewController {
             dayButton.backgroundColor = UIColor.gray
             
             //            add 86400 (sec in 1 day)
-//            let addOneDay = dateToBeginDate.addingTimeInterval(86400)
-
-           let addOneDay = dateToBeginDate.addingTimeInterval(86400)
+            //            let addOneDay = dateToBeginDate.addingTimeInterval(86400)
+            
+            let addOneDay = dateToBeginDate.addingTimeInterval(86400)
             
             
             print(addOneDay)
             print("================")
             
-        } else {
-            dayButton.isSelected = false
-            dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            
+            weekButton.isSelected = false
+            weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            monthButton.isSelected = false
+            monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            yearButton.isSelected = false
+            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            
+            addEvery = 1
         }
     }
     
@@ -345,9 +350,15 @@ class AddByTimeVC: UIViewController {
         if weekButton.isSelected == false {
             weekButton.isSelected = true
             weekButton.backgroundColor = UIColor.gray
-        } else {
-            weekButton.isSelected = false
-            weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            dayButton.isSelected = false
+            dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            monthButton.isSelected = false
+            monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            yearButton.isSelected = false
+            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            
+            addEvery = 7
+            
         }
     }
     
@@ -355,9 +366,15 @@ class AddByTimeVC: UIViewController {
         if monthButton.isSelected == false {
             monthButton.isSelected = true
             monthButton.backgroundColor = UIColor.gray
-        } else {
-            monthButton.isSelected = false
-            monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            dayButton.isSelected = false
+            dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            weekButton.isSelected = false
+            weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            yearButton.isSelected = false
+            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            
+            addEvery = 30
+            
         }
     }
     
@@ -365,24 +382,61 @@ class AddByTimeVC: UIViewController {
         if yearButton.isSelected == false {
             yearButton.isSelected = true
             yearButton.backgroundColor = UIColor.gray
-        } else {
-            yearButton.isSelected = false
-            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            dayButton.isSelected = false
+            dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            weekButton.isSelected = false
+            weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            monthButton.isSelected = false
+            monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
+            
+            addEvery = 365
+            
         }
     }
     
     
-    @IBAction func Swich(_ sender: UISwitch) {
-        
-        //        reload
-        
-    }
+    
     
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         
-        setDateToBegin()
-        whenToUpdateMoney()
+        
+        if swicher.isOn{
+            setConstantAmountToAdd()
+            setDateToBegin()
+            setAddEvery()
+            
+        } else {
+            //do nothing
+        }
+        
+        
+        
+        showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
+        
     }
+    
 }
 
+
+
+extension AddByTimeVC {
+    
+    func showToast(message : String, font: UIFont) {
+        
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    } }

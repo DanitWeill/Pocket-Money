@@ -10,7 +10,7 @@ import SwipeCellKit
 
 class UserCell: SwipeTableViewCell {
 
-    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var color: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
@@ -19,10 +19,12 @@ class UserCell: SwipeTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        color.layer.cornerRadius = self.frame.height / 4.0
+        color.layer.cornerRadius = self.frame.height / 6.0
         color.layer.masksToBounds = true
-        
      
+        
+        userPicture.layer.cornerRadius = userPicture.frame.size.width/2
+        userPicture.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

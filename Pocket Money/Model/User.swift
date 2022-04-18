@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 struct User {
     let name: String
     var sum: Int
+//    let color: String
+    var picture: UIImage
 }
 
     

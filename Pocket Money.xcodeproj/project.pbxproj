@@ -7,17 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		370D384FF6991EE459744C19 /* Pods_Pocket_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */; };
 		844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A527A91E0400C440A1 /* AppDelegate.swift */; };
 		844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A727A91E0400C440A1 /* SceneDelegate.swift */; };
-		844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A927A91E0400C440A1 /* ViewController.swift */; };
+		844B13AA27A91E0400C440A1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A927A91E0400C440A1 /* Home.swift */; };
 		844B13AD27A91E0400C440A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B13AB27A91E0400C440A1 /* Main.storyboard */; };
 		844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */; };
 		844B13B227A91E0500C440A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B127A91E0500C440A1 /* Assets.xcassets */; };
 		844B13B527A91E0500C440A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B13B327A91E0500C440A1 /* LaunchScreen.storyboard */; };
 		844B13D927A9231D00C440A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 844B13D827A9231D00C440A1 /* GoogleService-Info.plist */; };
-		844B13DC27A9261C00C440A1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 844B13DB27A9261C00C440A1 /* FirebaseAuth */; };
-		844B13DE27A9261C00C440A1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 844B13DD27A9261C00C440A1 /* FirebaseFirestore */; };
 		844B13E227A929A600C440A1 /* SigninVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E127A929A600C440A1 /* SigninVC.swift */; };
 		844B13E427A9378800C440A1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E327A9378800C440A1 /* LoginVC.swift */; };
 		844B13E627A93DF300C440A1 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13E527A93DF300C440A1 /* MainVC.swift */; };
@@ -25,12 +22,13 @@
 		844B13EC27AA74EF00C440A1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13EA27AA74EF00C440A1 /* UserCell.swift */; };
 		844B13ED27AA74EF00C440A1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844B13EB27AA74EF00C440A1 /* UserCell.xib */; };
 		844B13F127ABDDD800C440A1 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */; };
+		848494BB27DA3BAF004543DE /* DateCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848494BA27DA3BAF004543DE /* DateCalculate.swift */; };
 		8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */; };
 		84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8474327C4D07C007138F0 /* AddByTimeVC.swift */; };
 		84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D027B90B2700952350 /* UserDetailsCell.swift */; };
 		84C616D327B90B2700952350 /* UserDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C616D127B90B2700952350 /* UserDetailsCell.xib */; };
 		84C616D527B9185A00952350 /* DateAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D427B9185A00952350 /* DateAmount.swift */; };
-		84C616D727BE365400952350 /* addUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D627BE365400952350 /* addUserVC.swift */; };
+		84C616D727BE365400952350 /* AddUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D627BE365400952350 /* AddUserVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +36,7 @@
 		3BEBDF27D7B93F07186AA918 /* Pods-Pocket Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Money.debug.xcconfig"; path = "Target Support Files/Pods-Pocket Money/Pods-Pocket Money.debug.xcconfig"; sourceTree = "<group>"; };
 		844B13A527A91E0400C440A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844B13A727A91E0400C440A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		844B13A927A91E0400C440A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		844B13A927A91E0400C440A1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		844B13AC27A91E0400C440A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		844B13AF27A91E0400C440A1 /* Pocket_Money.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pocket_Money.xcdatamodel; sourceTree = "<group>"; };
 		844B13B127A91E0500C440A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,14 +50,14 @@
 		844B13EA27AA74EF00C440A1 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		844B13EB27AA74EF00C440A1 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
+		848494BA27DA3BAF004543DE /* DateCalculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculate.swift; sourceTree = "<group>"; };
 		8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyToUserVC.swift; sourceTree = "<group>"; };
 		84A8474327C4D07C007138F0 /* AddByTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddByTimeVC.swift; sourceTree = "<group>"; };
 		84A8474527C563CE007138F0 /* Pocket Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C616D027B90B2700952350 /* UserDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCell.swift; sourceTree = "<group>"; };
 		84C616D127B90B2700952350 /* UserDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsCell.xib; sourceTree = "<group>"; };
 		84C616D427B9185A00952350 /* DateAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAmount.swift; sourceTree = "<group>"; };
-		84C616D627BE365400952350 /* addUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addUserVC.swift; sourceTree = "<group>"; };
-		9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pocket_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C616D627BE365400952350 /* AddUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,9 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844B13DC27A9261C00C440A1 /* FirebaseAuth in Frameworks */,
-				844B13DE27A9261C00C440A1 /* FirebaseFirestore in Frameworks */,
-				370D384FF6991EE459744C19 /* Pods_Pocket_Money.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,11 +122,11 @@
 		844B13E027A9296F00C440A1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				844B13A927A91E0400C440A1 /* ViewController.swift */,
+				844B13A927A91E0400C440A1 /* Home.swift */,
 				844B13E127A929A600C440A1 /* SigninVC.swift */,
 				844B13E327A9378800C440A1 /* LoginVC.swift */,
 				844B13E527A93DF300C440A1 /* MainVC.swift */,
-				84C616D627BE365400952350 /* addUserVC.swift */,
+				84C616D627BE365400952350 /* AddUserVC.swift */,
 				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
 				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
 				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
@@ -144,6 +139,7 @@
 			children = (
 				844B13E727A93F7B00C440A1 /* User.swift */,
 				84C616D427B9185A00952350 /* DateAmount.swift */,
+				848494BA27DA3BAF004543DE /* DateCalculate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,7 +147,6 @@
 		920E6599A50466F333348150 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9F3CD8FC08E06634FDC30AC2 /* Pods_Pocket_Money.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,8 +170,6 @@
 			);
 			name = "Pocket Money";
 			packageProductDependencies = (
-				844B13DB27A9261C00C440A1 /* FirebaseAuth */,
-				844B13DD27A9261C00C440A1 /* FirebaseFirestore */,
 			);
 			productName = "Pocket Money";
 			productReference = 84A8474527C563CE007138F0 /* Pocket Money.app */;
@@ -207,7 +200,6 @@
 			);
 			mainGroup = 844B139927A91E0400C440A1;
 			packageReferences = (
-				844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 844B139927A91E0400C440A1;
 			projectDirPath = "";
@@ -281,7 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844B13AA27A91E0400C440A1 /* ViewController.swift in Sources */,
+				844B13AA27A91E0400C440A1 /* Home.swift in Sources */,
 				844B13E227A929A600C440A1 /* SigninVC.swift in Sources */,
 				844B13E427A9378800C440A1 /* LoginVC.swift in Sources */,
 				844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */,
@@ -291,8 +283,9 @@
 				844B13F127ABDDD800C440A1 /* UserDetailsVC.swift in Sources */,
 				844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */,
 				84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */,
+				848494BB27DA3BAF004543DE /* DateCalculate.swift in Sources */,
 				844B13E627A93DF300C440A1 /* MainVC.swift in Sources */,
-				84C616D727BE365400952350 /* addUserVC.swift in Sources */,
+				84C616D727BE365400952350 /* AddUserVC.swift in Sources */,
 				84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */,
 				84C616D527B9185A00952350 /* DateAmount.swift in Sources */,
 				8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */,
@@ -448,6 +441,7 @@
 				DEVELOPMENT_TEAM = 53M7K278XT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pocket Money/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to upload photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -477,6 +471,7 @@
 				DEVELOPMENT_TEAM = 53M7K278XT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pocket Money/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to upload photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -517,30 +512,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		844B13DB27A9261C00C440A1 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		844B13DD27A9261C00C440A1 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 844B13DA27A9261C00C440A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		844B13AE27A91E0400C440A1 /* Pocket_Money.xcdatamodeld */ = {

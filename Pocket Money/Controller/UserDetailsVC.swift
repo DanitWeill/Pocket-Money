@@ -12,6 +12,7 @@ class UserDetailsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var sumLabel: UILabel!
     
     let db = Firestore.firestore()

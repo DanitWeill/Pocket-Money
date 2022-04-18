@@ -9,12 +9,18 @@ import UIKit
 import Firebase
 import SwipeCellKit
 
+
 class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var users: [User] = []
-   
+    
+    let date = Date()
+    var timesToAdd = 0
+    var finalAmountOfMoneyToAdd = 0
+    var userImage = UIImage()
+    
     let db = Firestore.firestore()
     
     var userIndex = Int()
@@ -24,19 +30,24 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-    
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCellIdentifier")
         
         NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("newUserUpdate"), object: nil)
         
-        loadUsers()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
+        
+        loadUsers()
+        
     }
     
+    
+    
     @objc func sumUpdateRecived(){
-        
         
         loadUsers()
         
@@ -48,19 +59,130 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             if let e = error {
                 print("Error getting documents: \(e)")
             } else {
-                if let snapShotDocuments = querySnapshot?.documents {
-                    for document in snapShotDocuments {
-                        print("\(document.documentID) => \(document.data())")
-                        let data = document.data()
-                        if let name = data["name"] as? String, let sum = data["sum"] as? Int {
-                            let newUser = User(name: name, sum: sum)
-                            self.users.append(newUser)
-                            
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
+                if let documents = querySnapshot?.documents {
+                    
+                    
+                    var num = -1
+                    
+                    
+                    for document in documents {
                         
+                        num = num + 1
+                        
+                        let data = document.data()
+                        
+                        if let name = data["name"] as? String, let sum = data["sum"] as? Int {
+                            
+                            if document.data()["constant_amount_to_add"] != nil && document.data()["add_every"] != nil && document.data()["date_to_begin"] != nil{
+                                
+                                // Calculate how often to add money
+                                let constantAmountToAdd = document.data()["constant_amount_to_add"] as? Int ?? 0
+                                let addEvery = document.data()["add_every"] as? Int ?? 0
+                                let  oldSum2 = document.data()["sum"] as? Int ?? 0
+                                let dateToBegin = document.data()["date_to_begin"] as! TimeInterval
+                                let now = self.date.timeIntervalSince1970
+                                
+                                if dateToBegin == 0 && addEvery == 0 && constantAmountToAdd == 0{
+                                    self.finalAmountOfMoneyToAdd = 0
+                                } else if
+                                    now < dateToBegin {
+                                    // number of days between now to date to begin as int
+                                    self.timesToAdd = Int((dateToBegin - now) / 86400)
+                                    self.finalAmountOfMoneyToAdd = self.timesToAdd / addEvery * constantAmountToAdd
+                                    
+                                } else if now > dateToBegin {
+                                    self.timesToAdd = Int((dateToBegin + now) / 86400)
+                                    self.finalAmountOfMoneyToAdd = self.timesToAdd / addEvery * constantAmountToAdd
+                                    
+                                }
+                                
+                                self.db.collection("users").document(name).setData(["final_amount_to_add" : self.finalAmountOfMoneyToAdd], merge: true) { err in
+                                    if let err = err {
+                                        print("Error writing document: \(err)")
+                                        
+                                    } else {
+                                        
+                                        let sumReference = self.db.collection("users").document(name)
+                                        
+                                        self.db.runTransaction({ (transaction, errorPointer) -> Any? in
+                                            let sfDocument: DocumentSnapshot
+                                            do {
+                                                try sfDocument = transaction.getDocument(sumReference)
+                                            } catch let fetchError as NSError {
+                                                errorPointer?.pointee = fetchError
+                                                return nil
+                                            }
+                                            
+                                            guard let oldSum = sfDocument.data()?["sum"] as? Int else {
+                                                let error = NSError(
+                                                    domain: "AppErrorDomain",
+                                                    code: -1,
+                                                    userInfo: [
+                                                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+                                                    ]
+                                                )
+                                                errorPointer?.pointee = error
+                                                return nil
+                                            }
+                                            
+                                            
+                                            transaction.updateData(["sum": oldSum + self.finalAmountOfMoneyToAdd], forDocument: sumReference)
+                                            return nil
+                                        }) { (object, error) in
+                                            if let error = error {
+                                                print("Transaction failed: \(error)")
+                                            } else {
+                                                print("Transaction finalSum successfully committed!")
+                                                
+                                                print(num)
+                                                
+                                                
+                                                // Adding user picture
+                                                if document.data()["pictureURL"] as? String != ""{
+                                                    let imageURL = document.data()["pictureURL"] as? String
+                                                    
+                                                    let storage = Storage.storage().reference(forURL: imageURL!)
+                                                    
+                                                    storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                                        if let error = error {
+                                                            
+                                                            self.userImage = UIImage(named: "userIcon")!
+                                                            print(error.localizedDescription)
+                                                            
+                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
+                                                            
+                                                            self.users.append(newUser)
+                                                            self.tableView.reloadData()
+                                                        } else {
+                                                            
+                                                            self.userImage = UIImage(data: data!)!
+                                                            
+                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
+                                                            
+                                                            self.users.append(newUser)
+                                                            self.tableView.reloadData()
+                                                        }
+                                                    }
+                                                    
+                                                }else{
+                                                    self.userImage = UIImage(named: "userIcon")!
+                                                    
+                                                    let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
+                                                    
+                                                    self.users.append(newUser)
+                                                    self.tableView.reloadData()
+                                                }
+                                                
+                                                
+                                                
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
                     }
                 }
             }
@@ -69,7 +191,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
-    performSegue(withIdentifier: "goToAddUserVC", sender: self)
+        performSegue(withIdentifier: "goToAddUserVC", sender: self)
         
     }
     
@@ -80,6 +202,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
+        
+        performSegue(withIdentifier: "goToHomePage", sender: self)
     }
     
     
@@ -109,6 +233,9 @@ extension MainVC: UITableViewDataSource {
             cell.color.backgroundColor = backgroundColor[indexPath.row]
         }
         
+        
+        cell.userPicture.image = users[indexPath.row].picture
+        
         return cell
     }
     
@@ -135,7 +262,7 @@ extension MainVC: SwipeTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-
+        
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             // handle action by updating model with deletion
             print("item deleted")
@@ -151,11 +278,20 @@ extension MainVC: SwipeTableViewCellDelegate {
             self.loadUsers()
             tableView.reloadData()
         }
-
+        
         // customize the action appearance
         deleteAction.image = UIImage(named: "delete-icon")
-
+        
         return [deleteAction]
     }
     
 }
+//
+//extension String {
+//    func toImage() -> UIImage? {
+//        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
+//            return UIImage(data: data)
+//        }
+//        return nil
+//    }
+//}

@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print (db)
         
         return true
+        
+
     }
 
     // MARK: UISceneSession Lifecycle

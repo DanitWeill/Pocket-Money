@@ -14,7 +14,6 @@ class AddMoneyToUserVC: UIViewController {
     @IBOutlet weak var nameLabel2: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var poppingAddedLabel: UILabel!
     
     var nameToPass: String = ""
     var sumToPass: String = ""
@@ -23,7 +22,7 @@ class AddMoneyToUserVC: UIViewController {
     let db = Firestore.firestore()
     var dateMoneyAdded = String()
     var amountToAdd = Int()
-    
+    var finalAmountOfMoneyToAddToSum = DateCalculate().finalAmountOfMoneyToAdd
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +52,8 @@ class AddMoneyToUserVC: UIViewController {
 
         //UI
         let sum = Int(sumToPass)
-        let amountToAdd = Int(amountTextField.text!)
-        let newSum = sum! + amountToAdd!
+        let amountToAdd = Int(amountTextField.text!) ?? 0
+        let newSum = sum! + amountToAdd
         amountTextField.text = ""
         sumLabel.text = String(newSum)
         
@@ -82,7 +81,7 @@ class AddMoneyToUserVC: UIViewController {
             }
             
             //update sum in db
-            transaction.updateData(["sum": oldSum + amountToAdd!], forDocument: sumReference)
+            transaction.updateData(["sum": oldSum + amountToAdd], forDocument: sumReference)
             return nil
         }) { (object, error) in
             if let error = error {
@@ -104,14 +103,14 @@ class AddMoneyToUserVC: UIViewController {
                 UserDetailsVC().dateArray = []
                 sumReference.collection("history").addDocument(data: [
                     "date money added": self.dateMoneyAdded,
-                    "amount to add": amountToAdd!,
+                    "amount to add": amountToAdd,
                     "date": Date().timeIntervalSince1970
                    ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = amountToAdd {
+                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = amountToAdd as? Int {
                             let newDate = DateAmount(dateMoneyAdded: dateMoneyAdded, amountAdded: amoundToAdd)
                             UserDetailsVC().dateArray.append(newDate)
                             
@@ -134,8 +133,8 @@ class AddMoneyToUserVC: UIViewController {
         }
         view.endEditing(true)
 
-//        poppingAddedLabel.ti
-        
+        self.showToast(message: "Added!", font: .systemFont(ofSize: 12.0))
+
     }
     @objc func tap(sender: UITapGestureRecognizer){
             print("tapped")
@@ -154,3 +153,23 @@ class AddMoneyToUserVC: UIViewController {
     }
 }
 
+extension AddMoneyToUserVC {
+
+func showToast(message : String, font: UIFont) {
+
+    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    toastLabel.textColor = UIColor.white
+    toastLabel.font = font
+    toastLabel.textAlignment = .center;
+    toastLabel.text = message
+    toastLabel.alpha = 1.0
+    toastLabel.layer.cornerRadius = 10;
+    toastLabel.clipsToBounds  =  true
+    self.view.addSubview(toastLabel)
+    UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+         toastLabel.alpha = 0.0
+    }, completion: {(isCompleted) in
+        toastLabel.removeFromSuperview()
+    })
+} }
