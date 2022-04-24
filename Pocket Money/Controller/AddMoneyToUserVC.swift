@@ -158,12 +158,12 @@ extension AddMoneyToUserVC {
 func showToast(message : String, font: UIFont) {
 
     let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    toastLabel.backgroundColor = UIColor.green.withAlphaComponent(0.6)
     toastLabel.textColor = UIColor.white
     toastLabel.font = font
     toastLabel.textAlignment = .center;
     toastLabel.text = message
-    toastLabel.alpha = 1.0
+    toastLabel.alpha = 3.0
     toastLabel.layer.cornerRadius = 10;
     toastLabel.clipsToBounds  =  true
     self.view.addSubview(toastLabel)

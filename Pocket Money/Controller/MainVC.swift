@@ -21,6 +21,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     var finalAmountOfMoneyToAdd = 0
     var userImage = UIImage()
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     let db = Firestore.firestore()
     
     var userIndex = Int()
@@ -54,20 +56,23 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     }
     
     func loadUsers() {
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+//        UIApplication.shared.beginIgnoringInteractionEvents()
+        
         self.users = []
         db.collection("users").getDocuments { querySnapshot, error in
             if let e = error {
                 print("Error getting documents: \(e)")
+                
             } else {
                 if let documents = querySnapshot?.documents {
                     
-                    
-                    var num = -1
-                    
-                    
                     for document in documents {
-                        
-                        num = num + 1
                         
                         let data = document.data()
                         
@@ -134,8 +139,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                             } else {
                                                 print("Transaction finalSum successfully committed!")
                                                 
-                                                print(num)
-                                                
                                                 
                                                 // Adding user picture
                                                 if document.data()["pictureURL"] as? String != ""{
@@ -153,6 +156,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                             
                                                             self.users.append(newUser)
                                                             self.tableView.reloadData()
+                                                            
+                                                            // stop animate
+                                                            self.activityIndicator.stopAnimating()
+                                                            UIApplication.shared.endIgnoringInteractionEvents()
+                                                            
                                                         } else {
                                                             
                                                             self.userImage = UIImage(data: data!)!
@@ -161,6 +169,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                             
                                                             self.users.append(newUser)
                                                             self.tableView.reloadData()
+                                                           
+                                                            // stop animate
+                                                            self.activityIndicator.stopAnimating()
+                                                            UIApplication.shared.endIgnoringInteractionEvents()
                                                         }
                                                     }
                                                     
@@ -171,6 +183,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                     
                                                     self.users.append(newUser)
                                                     self.tableView.reloadData()
+                                                    
+                                                    // stop animate
+                                                    self.activityIndicator.stopAnimating()
+                                                    UIApplication.shared.endIgnoringInteractionEvents()
                                                 }
                                                 
                                                 
@@ -181,7 +197,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                     }
                                 }
                             }
-                            
                         }
                     }
                 }
