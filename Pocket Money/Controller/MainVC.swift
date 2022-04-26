@@ -19,6 +19,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     let date = Date()
     var timesToAdd = 0
     var finalAmountOfMoneyToAdd = 0
+    
+    var name = String()
+    var sum = Int()
+    var oldSum2 = Int()
+    var cellColor = UIColor(hexString: "#ffffff")
     var userImage = UIImage()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -62,7 +67,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         activityIndicator.style = .gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-//        UIApplication.shared.beginIgnoringInteractionEvents()
+        //        UIApplication.shared.beginIgnoringInteractionEvents()
         
         self.users = []
         db.collection("users").getDocuments { querySnapshot, error in
@@ -83,7 +88,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                 // Calculate how often to add money
                                 let constantAmountToAdd = document.data()["constant_amount_to_add"] as? Int ?? 0
                                 let addEvery = document.data()["add_every"] as? Int ?? 0
-                                let  oldSum2 = document.data()["sum"] as? Int ?? 0
+//                                let oldSum = sum ?? 0
                                 let dateToBegin = document.data()["date_to_begin"] as! TimeInterval
                                 let now = self.date.timeIntervalSince1970
                                 
@@ -140,59 +145,144 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                 print("Transaction finalSum successfully committed!")
                                                 
                                                 
-                                                // Adding user picture
-                                                if document.data()["pictureURL"] as? String != ""{
-                                                    let imageURL = document.data()["pictureURL"] as? String
+                                                //Grabbing the color from db
+                                                //                                                if document.data()["cellColor"] as? String != nil {
+                                                //                                                    let colorHexString = document.data()["cellColor"] as! String
+                                                //
+                                                //                                                    print(colorHexString)
+                                                //
+                                                //
+                                                //
+                                                //                                                    self.cellColor = UIColor(hexString: "\(colorHexString)")
+                                                //                                                    print("=================")
+                                                //                                                    print(self.cellColor)
+                                                //
+                                                //                                                    print("=================")
+                                                //                                                    print(self.users)
+                                                //
+                                                //                                                }
+                                                
+                                                if document.data()["cellColor"] as? String != nil {
+                                                    let colorHexString = document.data()["cellColor"] as! String
+                                                    self.cellColor = UIColor(hexString: "\(colorHexString)")
                                                     
-                                                    let storage = Storage.storage().reference(forURL: imageURL!)
-                                                    
-                                                    storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                                                        if let error = error {
-                                                            
-                                                            self.userImage = UIImage(named: "userIcon")!
-                                                            print(error.localizedDescription)
-                                                            
-                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
-                                                            
-                                                            self.users.append(newUser)
-                                                            self.tableView.reloadData()
-                                                            
-                                                            // stop animate
-                                                            self.activityIndicator.stopAnimating()
-                                                            UIApplication.shared.endIgnoringInteractionEvents()
-                                                            
-                                                        } else {
-                                                            
-                                                            self.userImage = UIImage(data: data!)!
-                                                            
-                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
-                                                            
-                                                            self.users.append(newUser)
-                                                            self.tableView.reloadData()
-                                                           
-                                                            // stop animate
-                                                            self.activityIndicator.stopAnimating()
-                                                            UIApplication.shared.endIgnoringInteractionEvents()
+                                                    print("=====================")
+                                                    print("cell color \(colorHexString)")
+                                                    print("cell color \(self.cellColor)")
+
+                                                    if document.data()["pictureURL"] as? String != "" {
+                                                        let imageURL = document.data()["pictureURL"] as? String
+                                                        let storage = Storage.storage().reference(forURL: imageURL!)
+                                                        storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                                            if let error = error {
+                                                                self.userImage = UIImage(named: "userIcon")!
+                                                                print(error.localizedDescription)
+                                                                
+                                                                //                                                            self.createNewUser()
+                                                                let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
+                                                                
+                                                                self.users.append(newUser)
+                                                                    self.tableView.reloadData()
+                                                                
+                                                                // stop animate
+                                                                self.activityIndicator.stopAnimating()
+                                                                UIApplication.shared.endIgnoringInteractionEvents()
+                                                            } else {
+                                                                let colorHexString = document.data()["cellColor"] as! String
+                                                                self.cellColor = UIColor(hexString: "\(colorHexString)")
+                                                                self.userImage = UIImage(data: data!)!
+                                                                
+                                                                //                                                            self.createNewUser()
+                                                                let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
+                                                                
+                                                                self.users.append(newUser)
+                                                                    self.tableView.reloadData()
+                                                                
+                                                                // stop animate
+                                                                self.activityIndicator.stopAnimating()
+                                                                UIApplication.shared.endIgnoringInteractionEvents()
+                                                            }
                                                         }
+                                                        
+                                                    }else{
+                                                        self.userImage = UIImage(named: "userIcon")!
+                                                        
+                                                        //                                                    self.createNewUser()
+                                                        let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
+                                                        
+                                                        self.users.append(newUser)
+                                                            self.tableView.reloadData()
+                                                        
+                                                        
+                                                        // stop animate
+                                                        self.activityIndicator.stopAnimating()
+                                                        UIApplication.shared.endIgnoringInteractionEvents()
                                                     }
                                                     
-                                                }else{
-                                                    self.userImage = UIImage(named: "userIcon")!
-                                                    
-                                                    let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, picture: self.userImage)
-                                                    
-                                                    self.users.append(newUser)
-                                                    self.tableView.reloadData()
-                                                    
-                                                    // stop animate
-                                                    self.activityIndicator.stopAnimating()
-                                                    UIApplication.shared.endIgnoringInteractionEvents()
-                                                }
-                                                
-                                                
-                                                
                                                 
                                             }
+                                            
+                                            
+                                            //                                                // Adding user picture
+                                            //                                                if document.data()["pictureURL"] as? String != "" && document.data()["cellColor"] as? String != nil {
+                                            //                                                    let colorHexString = document.data()["cellColor"] as! String
+                                            //                                                    self.cellColor = UIColor(hexString: "\(colorHexString)")
+                                            //
+                                            //                                                    let imageURL = document.data()["pictureURL"] as? String
+                                            //
+                                            //                                                    let storage = Storage.storage().reference(forURL: imageURL!)
+                                            //
+                                            //                                                    storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                            //                                                        if let error = error {
+                                            //
+                                            //                                                            self.userImage = UIImage(named: "userIcon")!
+                                            //                                                            print(error.localizedDescription)
+                                            //
+                                            ////                                                            self.createNewUser()
+                                            //                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, cellColor: self.cellColor, picture: self.userImage)
+                                            //
+                                            //                                                            self.users.append(newUser)
+                                            //                                                            self.tableView.reloadData()
+                                            //
+                                            //
+                                            //                                                            // stop animate
+                                            //                                                            self.activityIndicator.stopAnimating()
+                                            //                                                            UIApplication.shared.endIgnoringInteractionEvents()
+                                            //
+                                            //                                                        } else {
+                                            //
+                                            //                                                            self.userImage = UIImage(data: data!)!
+                                            //
+                                            ////                                                            self.createNewUser()
+                                            //                                                            let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, cellColor: self.cellColor, picture: self.userImage)
+                                            //
+                                            //                                                            self.users.append(newUser)
+                                            //                                                            self.tableView.reloadData()
+                                            //
+                                            //                                                            // stop animate
+                                            //                                                            self.activityIndicator.stopAnimating()
+                                            //                                                            UIApplication.shared.endIgnoringInteractionEvents()
+                                            //                                                        }
+                                            //                                                    }
+                                            //
+                                            //                                                }else{
+                                            //                                                    self.userImage = UIImage(named: "userIcon")!
+                                            //
+                                            ////                                                    self.createNewUser()
+                                            //                                                    let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, cellColor: self.cellColor, picture: self.userImage)
+                                            //
+                                            //                                                    self.users.append(newUser)
+                                            //                                                    self.tableView.reloadData()
+                                            //
+                                            //                                                    // stop animate
+                                            //                                                    self.activityIndicator.stopAnimating()
+                                            //                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                            //                                                }
+                                            
+                                            
+                                            print("====================================")
+                                            print(self.users)
+                                            
                                         }
                                     }
                                 }
@@ -203,26 +293,35 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             }
         }
     }
+}
+
+//    func createNewUser(){
+//        let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, cellColor: self.cellColor, picture: self.userImage)
+//
+//        self.users.append(newUser)
+//        self.tableView.reloadData()
+//    }
+
+
+@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
     
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        
-        performSegue(withIdentifier: "goToAddUserVC", sender: self)
-        
+    performSegue(withIdentifier: "goToAddUserVC", sender: self)
+    
+}
+
+@IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
+    let firebaseAuth = Auth.auth()
+    do {
+        try firebaseAuth.signOut()
+    } catch let signOutError as NSError {
+        print("Error signing out: %@", signOutError)
     }
     
-    @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-        
-        performSegue(withIdentifier: "goToHomePage", sender: self)
-    }
-    
-    
-    
+    performSegue(withIdentifier: "goToHomePage", sender: self)
+}
+
+
+
 }
 
 extension MainVC: UITableViewDataSource {
@@ -242,13 +341,13 @@ extension MainVC: UITableViewDataSource {
         cell.nameLabel.text = users[indexPath.row].name
         cell.sumLabel.text = String(users[indexPath.row].sum)
         
-        let backgroundColor = [UIColor.red, UIColor.orange, UIColor.purple, UIColor.blue, UIColor.green, UIColor.yellow]
+        //        let backgroundColor = [UIColor.red, UIColor.orange, UIColor.purple, UIColor.blue, UIColor.green, UIColor.yellow]
+        //
+        //        for color in backgroundColor {
+        //            cell.color.backgroundColor = backgroundColor[indexPath.row]
+        //        }
         
-        for color in backgroundColor {
-            cell.color.backgroundColor = backgroundColor[indexPath.row]
-        }
-        
-        
+        cell.color.backgroundColor = users[indexPath.row].cellColor
         cell.userPicture.image = users[indexPath.row].picture
         
         return cell
@@ -310,3 +409,23 @@ extension MainVC: SwipeTableViewCellDelegate {
 //        return nil
 //    }
 //}
+
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}

@@ -13,13 +13,14 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldSum: UITextField!
-    @IBOutlet weak var selectColor: UIButton!
+    @IBOutlet weak var selectColorButton: UIButton!
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     
     let storage = Storage.storage().reference()
-    var path = String()
     
+    var picturePath = String()
+    var cellColor = UIColor()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         textFieldSum.placeholder = "New amount of money (numbers only)"
         textFieldSum.keyboardType = .numberPad
         
-        selectColor.addTarget(self, action: #selector(didTapSelectColor), for: .touchUpInside )
+        selectColorButton.addTarget(self, action: #selector(didTapSelectColor), for: .touchUpInside )
         
         userPicture.image = UIImage(named: "userIcon")
         progressView.isHidden = true
@@ -53,23 +54,22 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     }
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
+        cellColor = viewController.selectedColor
       
-       
+
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
+         cellColor = viewController.selectedColor
+        selectColorButton.backgroundColor = cellColor
         
-        //save a string of the chosen color, and then add it to the db in add user button
-        
+//        print("===================")
+//        print(cellColor.htmlRGBColor)
     }
     
     
     @objc func tapedUserPic() {
-        
-        print("=======================")
- 
+         
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
@@ -97,20 +97,20 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
             return
         }
         
-        path = "userPicture/\(textFieldName.text).png"
+        picturePath = "userPicture/\(textFieldName.text).png"
         
         progressView.isHidden = false
 
-        let taskRefrence = storage.child(path).putData(imageData , metadata: nil) { _, error in
+        let taskRefrence = storage.child(picturePath).putData(imageData , metadata: nil) { _, error in
             guard error == nil else {
                 print("failed to upload ")
                 return
             }
             
             
-            self.storage.child(self.path).downloadURL { url, error in
+            self.storage.child(self.picturePath).downloadURL { url, error in
                 guard let url = url, error == nil else {return}
-            self.path = url.absoluteString
+            self.picturePath = url.absoluteString
                 
                 DispatchQueue.main.async {
                     self.userPicture.image = image
@@ -119,8 +119,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
                     UIApplication.shared.endIgnoringInteractionEvents()
                 }
                 
-            print("downdload URL: \(self.path)")
-            UserDefaults.standard.set(self.path, forKey: "url")
+            print("downdload URL: \(self.picturePath)")
+            UserDefaults.standard.set(self.picturePath, forKey: "url")
             }
         }
         // the snapshot tells about the current state of the upload
@@ -152,8 +152,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
             db.collection("users").document(userName).setData([
                 "name": userName,
                 "sum": userSum,
-                "cellColor": String(),
-                "pictureURL": path,
+                "cellColor": cellColor.htmlRGBColor,
+                "pictureURL": picturePath,
                 "add_every": 0,
                 "constant_amount_to_add": 0,
                 "date_to_begin": 0])
@@ -190,3 +190,32 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
 }
 
 
+extension UIColor {
+    var rgbComponents:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        if getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return (r,g,b,a)
+        }
+        return (0,0,0,0)
+    }
+    // hue, saturation, brightness and alpha components from UIColor**
+    var hsbComponents:(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var hue:CGFloat = 0
+        var saturation:CGFloat = 0
+        var brightness:CGFloat = 0
+        var alpha:CGFloat = 0
+        if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha){
+            return (hue,saturation,brightness,alpha)
+        }
+        return (0,0,0,0)
+    }
+    var htmlRGBColor:String {
+        return String(format: "#%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255))
+    }
+    var htmlRGBaColor:String {
+        return String(format: "#%02x%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255),Int(rgbComponents.alpha * 255) )
+    }
+}

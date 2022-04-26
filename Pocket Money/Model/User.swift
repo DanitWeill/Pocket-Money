@@ -12,7 +12,7 @@ import Firebase
 struct User {
     let name: String
     var sum: Int
-//    let color: String
+    let cellColor: UIColor
     var picture: UIImage
 }
 

@@ -265,7 +265,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ss6-Xh-Ojy">
-                                <rect key="frame" x="20" y="146" width="374" height="550"/>
+                                <rect key="frame" x="20" y="142" width="374" height="680"/>
                                 <color key="backgroundColor" red="0.98721724749999995" green="0.78291297820000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ZOD-x0-5Jh" id="FjM-Hb-RxT"/>
@@ -273,7 +273,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kids" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I14-cc-ci6">
-                                <rect key="frame" x="100" y="79" width="214" height="48"/>
+                                <rect key="frame" x="100" y="74" width="214" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -282,13 +282,13 @@
                         <viewLayoutGuide key="safeArea" id="qdF-Gn-x0u"/>
                         <color key="backgroundColor" red="0.98721724749999995" green="0.78291297820375849" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="centerY" secondItem="ILx-LM-3kV" secondAttribute="centerY" id="139-aZ-4TA"/>
-                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="centerX" secondItem="ILx-LM-3kV" secondAttribute="centerX" id="4uV-27-I44"/>
+                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="leading" secondItem="qdF-Gn-x0u" secondAttribute="leading" constant="20" id="9A8-Ag-Vld"/>
+                            <constraint firstItem="I14-cc-ci6" firstAttribute="top" secondItem="qdF-Gn-x0u" secondAttribute="top" constant="30" id="F1s-3I-ewQ"/>
                             <constraint firstItem="I14-cc-ci6" firstAttribute="leading" secondItem="qdF-Gn-x0u" secondAttribute="leading" constant="100" id="LWP-94-h3y"/>
-                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="top" secondItem="qdF-Gn-x0u" secondAttribute="top" constant="102" id="l6P-qf-wfv"/>
+                            <constraint firstItem="qdF-Gn-x0u" firstAttribute="trailing" secondItem="ss6-Xh-Ojy" secondAttribute="trailing" constant="20" id="Mma-50-Iz6"/>
+                            <constraint firstItem="qdF-Gn-x0u" firstAttribute="bottom" secondItem="ss6-Xh-Ojy" secondAttribute="bottom" constant="20" id="bcE-0n-m8e"/>
                             <constraint firstItem="qdF-Gn-x0u" firstAttribute="trailing" secondItem="I14-cc-ci6" secondAttribute="trailing" constant="100" id="miB-FG-NqZ"/>
-                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="leading" secondItem="ILx-LM-3kV" secondAttribute="leadingMargin" id="wlv-pd-blg"/>
-                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="top" secondItem="I14-cc-ci6" secondAttribute="bottom" constant="19" id="zfL-9g-sea"/>
+                            <constraint firstItem="ss6-Xh-Ojy" firstAttribute="top" secondItem="I14-cc-ci6" secondAttribute="bottom" constant="20" id="zfL-9g-sea"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VpZ-f0-YiH">
@@ -475,7 +475,7 @@
                     <navigationItem key="navigationItem" id="tJW-Sf-qTQ"/>
                     <connections>
                         <outlet property="progressView" destination="Dhy-dX-htr" id="zWI-kR-d7d"/>
-                        <outlet property="selectColor" destination="ZhC-UO-h9f" id="tIa-Ux-X7G"/>
+                        <outlet property="selectColorButton" destination="ZhC-UO-h9f" id="tIa-Ux-X7G"/>
                         <outlet property="textFieldName" destination="cRH-Uq-igg" id="NDe-ho-3x2"/>
                         <outlet property="textFieldSum" destination="4yY-6Y-WJU" id="f5L-mY-ba9"/>
                         <outlet property="userPicture" destination="7ud-1f-Fco" id="VbJ-ts-rbr"/>
