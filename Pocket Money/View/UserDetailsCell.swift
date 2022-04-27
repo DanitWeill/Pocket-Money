@@ -9,7 +9,7 @@ import UIKit
 
 class UserDetailsCell: UITableViewCell {
 
-    @IBOutlet weak var stackView: UIStackView!
+   
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountAddedLabel: UILabel!
     
@@ -17,7 +17,7 @@ class UserDetailsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        stackView.layer.cornerRadius = stackView.frame.size.height / 6.0
+       
 //        stackView.layer.masksToBounds = true
     }
     

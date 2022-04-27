@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SwiftUI
 
 class UserDetailsVC: UIViewController {
     
@@ -31,6 +32,9 @@ class UserDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+//        userPicture.layer.cornerRadius = 100
+        userPicture.clipsToBounds = true
         importData()
         
         nameLabel.text = usersStringToPass[userIndex].name
@@ -38,7 +42,14 @@ class UserDetailsVC: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserDetailsCell", bundle: nil), forCellReuseIdentifier: "UserDetailsCellIdentifier")
         
+        NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(dateRecived), name: Notification.Name("dateUpdate"), object: nil)
+        
+    }
+    
+    
+    func importData(){
         db.collection("users").document(usersStringToPass[userIndex].name).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
@@ -52,18 +63,23 @@ class UserDetailsVC: UIViewController {
             }
         }
         
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(dateRecived), name: Notification.Name("dateUpdate"), object: nil)
-        
-    }
-    
-    
-    func importData(){
-        
-
+        db.collection("users").document(usersStringToPass[userIndex].name).getDocument { doc, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }else{
+                let userPicRef = doc?.data()?["pictureURL"] as? String
+                let storage = Storage.storage().reference(forURL: userPicRef!)
+                storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        self.userPicture.image = UIImage(named: "userIcon")!
+                        print(error.localizedDescription)
+                    } else {
+                        self.userPicture.image = UIImage(data: data!)!
+                   
+                    }
+                }
+            }
+        }
         
         db.collection("users").document(usersStringToPass[userIndex].name).collection("history").order(by: "date").getDocuments { docs, err in
             if let e = err{
@@ -72,7 +88,7 @@ class UserDetailsVC: UIViewController {
                 
                 self.arrayOfDate = []
                 self.arrayOfAmount = []
-            
+                
                 if docs?.count ?? 0 > 0{
                     for i in 0...docs!.count-1{
                         
@@ -135,13 +151,14 @@ extension UserDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserDetailsCellIdentifier", for: indexPath) as! UserDetailsCell
         
-//        cell.dateLabel.text = dateArray[indexPath.row].dateMoneyAdded
-//        cell.amountAddedLabel.text = String(dateArray[indexPath.row].amountAdded)
-//        print(dateArray)
+        //        cell.dateLabel.text = dateArray[indexPath.row].dateMoneyAdded
+        //        cell.amountAddedLabel.text = String(dateArray[indexPath.row].amountAdded)
+        //        print(dateArray)
         
+        cell.backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.8856521249, blue: 0.1325125396, alpha: 1))
         
-                cell.dateLabel.text = arrayOfDate[indexPath.row]
-                cell.amountAddedLabel.text = String(arrayOfAmount[indexPath.row])
+        cell.dateLabel.text = arrayOfDate[indexPath.row]
+        cell.amountAddedLabel.text = String(arrayOfAmount[indexPath.row])
         
         return cell
     }

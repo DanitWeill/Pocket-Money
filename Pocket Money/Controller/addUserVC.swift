@@ -16,18 +16,19 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     @IBOutlet weak var selectColorButton: UIButton!
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     let storage = Storage.storage().reference()
     
     var picturePath = String()
-    var cellColor = UIColor()
+    var cellColor = UIColor(hexString: "#ffe747")
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAnywhere)))
-
+        
         textFieldName.placeholder = "New user name"
         textFieldSum.keyboardType = .alphabet
         
@@ -42,7 +43,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         let tapedUserPicture = UITapGestureRecognizer(target: self, action: #selector(tapedUserPic))
         userPicture.isUserInteractionEnabled = true
         userPicture.addGestureRecognizer(tapedUserPicture)
-
+        
         
     }
     
@@ -55,21 +56,21 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         cellColor = viewController.selectedColor
-      
-
+        
+        
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-         cellColor = viewController.selectedColor
+        cellColor = viewController.selectedColor
         selectColorButton.backgroundColor = cellColor
         
-//        print("===================")
-//        print(cellColor.htmlRGBColor)
+        //        print("===================")
+        //        print(cellColor.htmlRGBColor)
     }
     
     
     @objc func tapedUserPic() {
-         
+        
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
@@ -77,11 +78,11 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         present(imagePicker, animated: true)
         
         activityIndicator.center = self.view.center
-                activityIndicator.hidesWhenStopped = true
-                activityIndicator.style = .gray
-                view.addSubview(activityIndicator)
-                activityIndicator.startAnimating()
-                UIApplication.shared.beginIgnoringInteractionEvents()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
     }
     
@@ -89,7 +90,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         dismiss(animated: true, completion: nil)
-
+        
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
@@ -100,7 +101,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         picturePath = "userPicture/\(textFieldName.text).png"
         
         progressView.isHidden = false
-
+        
         let taskRefrence = storage.child(picturePath).putData(imageData , metadata: nil) { _, error in
             guard error == nil else {
                 print("failed to upload ")
@@ -110,7 +111,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
             
             self.storage.child(self.picturePath).downloadURL { url, error in
                 guard let url = url, error == nil else {return}
-            self.picturePath = url.absoluteString
+                self.picturePath = url.absoluteString
                 
                 DispatchQueue.main.async {
                     self.userPicture.image = image
@@ -119,15 +120,22 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
                     UIApplication.shared.endIgnoringInteractionEvents()
                 }
                 
-            print("downdload URL: \(self.picturePath)")
-            UserDefaults.standard.set(self.picturePath, forKey: "url")
+                print("downdload URL: \(self.picturePath)")
+                UserDefaults.standard.set(self.picturePath, forKey: "url")
             }
         }
         // the snapshot tells about the current state of the upload
         taskRefrence.observe(.progress) { snapshot in
-            guard let pctThere = snapshot.progress?.fractionCompleted else {return}
-            print("you are \(pctThere) complete")
-            self.progressView.progress = Float(pctThere)
+            guard let picLoadThere = snapshot.progress?.fractionCompleted else {return}
+            print("you are \(picLoadThere) complete")
+            
+            self.progressView.progress = Float(picLoadThere)
+            if picLoadThere == 1.0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6){
+                    self.progressView.isHidden = true
+
+                }
+            }
         }
     }
     
@@ -139,12 +147,14 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     
     @objc func tapAnywhere(sender: UITapGestureRecognizer){
-            print("tapped")
-            view.endEditing(true)
+        print("tapped")
+        view.endEditing(true)
     }
     
+    
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
-        
+        if textFieldName.text != "" && textFieldSum.text != "" {
+            
         if let userName = self.textFieldName.text, let userSum = Int(self.textFieldSum.text!) {
             let db = Firestore.firestore()
             
@@ -169,18 +179,20 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
                     MainVC().users = []
                     
                     NotificationCenter.default.post(name: Notification.Name("newUserUpdate"), object: nil)
-
+                    
                 }
             }
-    
+            _ = navigationController?.popViewController(animated: true)
+        }
         } else {
-            // What will happen if there is no name and sum - pop up message "you didnt enter name and sum".
+            print("please fill in name and sum")
+            errorLabel.text = "Please fill in Name and Sum"
+            
             // name and sum vibrate
             // do nothing
         }
         
-        _ = navigationController?.popViewController(animated: true)
-
+        
         
     }
     

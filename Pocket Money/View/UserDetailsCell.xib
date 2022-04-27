@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,49 +11,36 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="UserDetailsCellIdentifier" id="gTV-IL-0wX" userLabel="UserDetailsCell" customClass="UserDetailsCell" customModule="Pocket_Money">
-            <rect key="frame" x="0.0" y="0.0" width="462" height="74"/>
+            <rect key="frame" x="0.0" y="0.0" width="447" height="99"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="462" height="74"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="99"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zn6-ye-clc">
-                        <rect key="frame" x="0.0" y="0.0" width="462" height="74"/>
+                        <rect key="frame" x="0.0" y="0.0" width="447" height="99"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZJS-Gs-LDr">
-                                <rect key="frame" x="30" y="20" width="402" height="34"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT2-yk-VIS">
-                                        <rect key="frame" x="0.0" y="0.0" width="267.5" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountAdded" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDZ-Ks-aVf">
-                                        <rect key="frame" x="277.5" y="0.0" width="124.5" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="JT2-yk-VIS" secondAttribute="bottom" id="3h8-fb-neF"/>
-                                    <constraint firstItem="JT2-yk-VIS" firstAttribute="top" secondItem="ZJS-Gs-LDr" secondAttribute="top" id="BnN-N0-fVX"/>
-                                    <constraint firstItem="JT2-yk-VIS" firstAttribute="leading" secondItem="ZJS-Gs-LDr" secondAttribute="leading" id="N2a-lx-9BQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="SDZ-Ks-aVf" secondAttribute="bottom" id="NEZ-6D-rf5"/>
-                                    <constraint firstItem="SDZ-Ks-aVf" firstAttribute="leading" secondItem="JT2-yk-VIS" secondAttribute="trailing" constant="10" id="Ot2-qM-N4O"/>
-                                    <constraint firstAttribute="trailing" secondItem="SDZ-Ks-aVf" secondAttribute="trailing" id="QUI-wW-OLj"/>
-                                    <constraint firstItem="SDZ-Ks-aVf" firstAttribute="top" secondItem="ZJS-Gs-LDr" secondAttribute="top" id="mLe-sB-Jj1"/>
-                                </constraints>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT2-yk-VIS">
+                                <rect key="frame" x="30" y="10" width="39" height="79"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountAdded" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDZ-Ks-aVf">
+                                <rect key="frame" x="109" y="10" width="124.5" height="79"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.77649313210000004" green="0.77634513380000003" blue="0.7843149304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.98157067310000001" green="0.88980110209999996" blue="0.32543618639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ZJS-Gs-LDr" secondAttribute="bottom" constant="20" id="3qc-u6-Q0G"/>
-                            <constraint firstAttribute="trailing" secondItem="ZJS-Gs-LDr" secondAttribute="trailing" constant="30" id="anC-Qb-3Nl"/>
-                            <constraint firstItem="ZJS-Gs-LDr" firstAttribute="leading" secondItem="Zn6-ye-clc" secondAttribute="leading" constant="30" id="gra-sr-OkH"/>
-                            <constraint firstItem="ZJS-Gs-LDr" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="20" id="hJc-XB-Lic"/>
+                            <constraint firstAttribute="bottom" secondItem="JT2-yk-VIS" secondAttribute="bottom" constant="10" id="0oA-y9-Z8e"/>
+                            <constraint firstAttribute="bottom" secondItem="SDZ-Ks-aVf" secondAttribute="bottom" constant="10" id="3jo-FQ-KSs"/>
+                            <constraint firstItem="JT2-yk-VIS" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="10" id="4ZO-62-KTr"/>
+                            <constraint firstItem="SDZ-Ks-aVf" firstAttribute="leading" secondItem="JT2-yk-VIS" secondAttribute="trailing" constant="40" id="EOJ-UT-x9A"/>
+                            <constraint firstItem="SDZ-Ks-aVf" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="10" id="LsE-Vv-Idy"/>
+                            <constraint firstItem="JT2-yk-VIS" firstAttribute="leading" secondItem="Zn6-ye-clc" secondAttribute="leading" constant="30" id="Za6-jB-LnI"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -61,18 +48,17 @@
             <viewLayoutGuide key="safeArea" id="aHl-KS-xfA"/>
             <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Zn6-ye-clc" secondAttribute="bottom" id="4cV-u0-RJe"/>
-                <constraint firstItem="Zn6-ye-clc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Xqu-9G-CRV"/>
-                <constraint firstItem="Zn6-ye-clc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kBW-nV-Qth"/>
-                <constraint firstAttribute="trailing" secondItem="Zn6-ye-clc" secondAttribute="trailing" id="uad-Bd-fXo"/>
+                <constraint firstAttribute="trailing" secondItem="Zn6-ye-clc" secondAttribute="trailing" id="2Eb-nK-kBH"/>
+                <constraint firstAttribute="bottom" secondItem="Zn6-ye-clc" secondAttribute="bottom" id="Jsn-kO-SdN"/>
+                <constraint firstItem="Zn6-ye-clc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VEy-qM-TNM"/>
+                <constraint firstItem="Zn6-ye-clc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fT7-Vh-ib6"/>
             </constraints>
-            <size key="customSize" width="462" height="74"/>
+            <size key="customSize" width="447" height="99"/>
             <connections>
                 <outlet property="amountAddedLabel" destination="SDZ-Ks-aVf" id="tzm-Ht-c2P"/>
                 <outlet property="dateLabel" destination="JT2-yk-VIS" id="bJL-Le-7Hp"/>
-                <outlet property="stackView" destination="ZJS-Gs-LDr" id="ErP-kB-n1D"/>
             </connections>
-            <point key="canvasLocation" x="442.02898550724643" y="119.86607142857142"/>
+            <point key="canvasLocation" x="431.15942028985512" y="111.49553571428571"/>
         </collectionViewCell>
     </objects>
     <resources>
