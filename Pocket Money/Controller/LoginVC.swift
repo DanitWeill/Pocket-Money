@@ -19,6 +19,7 @@ class LoginVC: UIViewController {
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
 
+//        navigationItem.leftBarButtonItem?.customView?.isHidden = false
     }
     
     @objc func tap(sender: UITapGestureRecognizer){
@@ -28,13 +29,26 @@ class LoginVC: UIViewController {
     
     @IBAction func loginButton(_ sender: UIButton) {
     
+      
     if let email = usernameTextField.text, let password = passwordTextField.text {
             
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error{
                     print(e)
                 } else {
-                    self.performSegue(withIdentifier: "loginToMainVC", sender: self)
+                    
+                    
+                    
+                    self.performSegue(withIdentifier: "goToMainVC", sender: nil)
+                    
+//                    if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC
+//                    {
+//                        let navVc = UINavigationController(rootViewController: vc)
+//
+//                        self.present(navVc, animated: true, completion: nil)
+//                    }
+                    
+                    
                 }
             }
         }

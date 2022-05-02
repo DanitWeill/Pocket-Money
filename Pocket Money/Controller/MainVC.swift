@@ -26,31 +26,55 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     var cellColor = UIColor(hexString: "#ffffff")
     var userImage = UIImage()
     
+    private var handle: AuthStateDidChangeListenerHandle?
+    
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     let db = Firestore.firestore()
     
     var userIndex = Int()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
-        tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCellIdentifier")
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("newUserUpdate"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
-        
-        loadUsers()
-        // stop animate
-        self.activityIndicator.stopAnimating()
-        UIApplication.shared.endIgnoringInteractionEvents()
+        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
+            if user == nil{
+                
+                
+              
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
+                {
+                    self.present(vc, animated: true, completion: nil)
+                }
+                    
+                
+            }else{
+                
+                
+                
+                self.tableView.delegate = self
+                self.tableView.dataSource = self
+                
+                self.navigationItem.setHidesBackButton(true, animated: true)
+                
+                self.tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCellIdentifier")
+                
+                NotificationCenter.default.addObserver(self, selector: #selector(self.sumUpdateRecived), name: Notification.Name("newUserUpdate"), object: nil)
+                
+                NotificationCenter.default.addObserver(self, selector: #selector(self.sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
+                
+                self.loadUsers()
+                // stop animate
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                
+                
+            }
+            
+        })
     }
     
     
@@ -68,13 +92,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         activityIndicator.style = .gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-                UIApplication.shared.beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
         self.users = []
         db.collection("users").getDocuments { querySnapshot, error in
             if let e = error {
                 print("Error getting documents: \(e)")
-
+                
             } else {
                 if let documents = querySnapshot?.documents {
                     
@@ -228,14 +252,24 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     }
     
     @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
+        
+       
+        
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "Home")
+//            self.present(controller, animated: true, completion: nil)
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
+            {
+                self.present(vc, animated: true, completion: nil)
+            }
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
         
-        performSegue(withIdentifier: "goToHomePage", sender: self)
     }
     
     
