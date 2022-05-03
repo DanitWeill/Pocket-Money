@@ -258,7 +258,7 @@
         <!--MainVC-->
         <scene sceneID="GTu-GO-MK5">
             <objects>
-                <viewController storyboardIdentifier="MainVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZOD-x0-5Jh" customClass="MainVC" customModule="Pocket_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZOD-x0-5Jh" customClass="MainVC" customModule="Pocket_Money" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ILx-LM-3kV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -502,19 +502,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CNv-xf-eHR">
-                                <rect key="frame" x="30" y="338" width="354" height="494"/>
+                                <rect key="frame" x="30" y="328" width="354" height="504"/>
                                 <color key="backgroundColor" red="0.98157067310000001" green="0.88980110209999996" blue="0.32543618639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BH-o8-UmN">
-                                <rect key="frame" x="50" y="266" width="314" height="42"/>
+                                <rect key="frame" x="50" y="256" width="314" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="eb7-kC-WUe">
-                                <rect key="frame" x="50" y="108" width="314" height="148"/>
+                                <rect key="frame" x="50" y="98" width="314" height="148"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I4b-3g-Csd">
                                         <rect key="frame" x="0.0" y="24" width="100" height="100"/>
@@ -534,6 +534,28 @@
                                     <constraint firstAttribute="width" secondItem="eb7-kC-WUe" secondAttribute="height" multiplier="53:25" id="v0K-M5-hLI"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4w-ja-aCI">
+                                <rect key="frame" x="294" y="756" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.89824797840000004" green="0.63790452689999999" blue="0.1559480754" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="4RI-J0-sgM"/>
+                                    <constraint firstAttribute="width" constant="70" id="8kI-IE-BLs"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Add Money">
+                                            <attributes>
+                                                <font key="NSFont" size="10" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="oSX-hd-0mT" kind="presentation" id="9PQ-hQ-5j7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ojc-u9-rMQ"/>
                         <color key="backgroundColor" red="0.98157067310000001" green="0.88980110209999996" blue="0.32543618639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -541,47 +563,116 @@
                             <constraint firstItem="Ojc-u9-rMQ" firstAttribute="bottom" secondItem="CNv-xf-eHR" secondAttribute="bottom" constant="30" id="7ki-AR-gN8"/>
                             <constraint firstItem="Ojc-u9-rMQ" firstAttribute="trailing" secondItem="1BH-o8-UmN" secondAttribute="trailing" constant="50" id="930-f5-TXw"/>
                             <constraint firstItem="Ojc-u9-rMQ" firstAttribute="trailing" secondItem="CNv-xf-eHR" secondAttribute="trailing" constant="30" id="944-Ft-8Ip"/>
+                            <constraint firstAttribute="bottom" secondItem="h4w-ja-aCI" secondAttribute="bottom" constant="70" id="IrI-ie-yoH"/>
                             <constraint firstItem="CNv-xf-eHR" firstAttribute="leading" secondItem="Ojc-u9-rMQ" secondAttribute="leading" constant="30" id="Rq8-ak-8ol"/>
-                            <constraint firstItem="eb7-kC-WUe" firstAttribute="top" secondItem="Ojc-u9-rMQ" secondAttribute="top" constant="20" id="Vdl-UE-12f"/>
+                            <constraint firstItem="eb7-kC-WUe" firstAttribute="top" secondItem="Ojc-u9-rMQ" secondAttribute="top" constant="10" id="Vdl-UE-12f"/>
                             <constraint firstItem="1BH-o8-UmN" firstAttribute="top" secondItem="eb7-kC-WUe" secondAttribute="bottom" constant="10" id="Xty-FY-6Y1"/>
                             <constraint firstItem="1BH-o8-UmN" firstAttribute="leading" secondItem="Ojc-u9-rMQ" secondAttribute="leading" constant="50" id="acB-i8-If8"/>
                             <constraint firstItem="CNv-xf-eHR" firstAttribute="top" secondItem="1BH-o8-UmN" secondAttribute="bottom" constant="30" id="eCE-g0-QRb"/>
+                            <constraint firstItem="Ojc-u9-rMQ" firstAttribute="trailing" secondItem="h4w-ja-aCI" secondAttribute="trailing" constant="50" id="mu6-F7-FCg"/>
                             <constraint firstItem="eb7-kC-WUe" firstAttribute="leading" secondItem="Ojc-u9-rMQ" secondAttribute="leading" constant="50" id="rYY-sG-QN5"/>
                             <constraint firstItem="Ojc-u9-rMQ" firstAttribute="trailing" secondItem="eb7-kC-WUe" secondAttribute="trailing" constant="50" id="tq8-4b-jD3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T3e-hD-8c4">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Add money" id="F1P-0P-eWa">
-                                <connections>
-                                    <action selector="goToaddMoneyPressed:" destination="yUM-5C-Mhb" id="ZX3-N5-MWe"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Prefrences" id="SFG-gb-CsO"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Prefrences" id="SFG-gb-CsO"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addMoneyPicker" destination="h4w-ja-aCI" id="966-OW-Qho"/>
                         <outlet property="nameLabel" destination="UrI-gX-8je" id="jlv-Ve-4Q2"/>
                         <outlet property="sumLabel" destination="1BH-o8-UmN" id="3Ru-M9-WVA"/>
                         <outlet property="tableView" destination="CNv-xf-eHR" id="pW0-0i-BqX"/>
                         <outlet property="userPicture" destination="I4b-3g-Csd" id="kTW-lV-Qwo"/>
-                        <segue destination="fjK-MJ-VLD" kind="show" identifier="GoToAddMoneyToUserVC" id="IUS-9w-LF8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGO-1f-wSE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8011.594202898551" y="89.732142857142847"/>
         </scene>
+        <!--PopUpButtonsVC-->
+        <scene sceneID="QCP-yG-49l">
+            <objects>
+                <viewController id="oSX-hd-0mT" userLabel="PopUpButtonsVC" customClass="PopUpButtonsVC" customModule="Pocket_Money" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SEp-PE-HeU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCa-dm-25Z">
+                                <rect key="frame" x="274" y="642" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.89824797844652959" green="0.63790452693057242" blue="0.15594807543106215" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Cbr-AU-Nmg"/>
+                                    <constraint firstAttribute="height" constant="70" id="vXX-ih-mha"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Add Money">
+                                            <attributes>
+                                                <font key="NSFont" size="7" name="ArialMT"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addMoney:" destination="oSX-hd-0mT" eventType="touchUpInside" id="cRP-IA-1kq"/>
+                                    <segue destination="fjK-MJ-VLD" kind="show" identifier="goToAddMoneyToUserVC" id="Ko4-80-ajk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-kt-V54">
+                                <rect key="frame" x="204" y="712" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.89824797840000004" green="0.63790452689999999" blue="0.1559480754" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="GST-Nn-A9g"/>
+                                    <constraint firstAttribute="height" constant="70" id="jAf-Dt-6qb"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Add constantly">
+                                            <attributes>
+                                                <font key="NSFont" size="7" name="ArialMT"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addConstant:" destination="oSX-hd-0mT" eventType="touchUpInside" id="LnD-Ko-A34"/>
+                                    <segue destination="S5t-DL-AYM" kind="presentation" identifier="goToAddByTimeVC" id="HYM-Qt-ZDt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mhb-pJ-pAh"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mhb-pJ-pAh" firstAttribute="bottom" secondItem="LCa-dm-25Z" secondAttribute="bottom" constant="130" id="Ivw-nX-Whc"/>
+                            <constraint firstItem="mhb-pJ-pAh" firstAttribute="bottom" secondItem="wPp-kt-V54" secondAttribute="bottom" constant="60" id="qf8-KE-dEJ"/>
+                            <constraint firstItem="mhb-pJ-pAh" firstAttribute="trailing" secondItem="LCa-dm-25Z" secondAttribute="trailing" constant="70" id="s79-Tr-bhB"/>
+                            <constraint firstItem="mhb-pJ-pAh" firstAttribute="trailing" secondItem="wPp-kt-V54" secondAttribute="trailing" constant="140" id="yTK-t4-qI7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Pov-ff-ls0"/>
+                    <connections>
+                        <outlet property="addConstant" destination="wPp-kt-V54" id="qxC-of-xM8"/>
+                        <outlet property="addMoney" destination="LCa-dm-25Z" id="TPE-gY-haQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ep8-ZV-ndW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8795.652173913044" y="-123.21428571428571"/>
+        </scene>
         <!--AddMoneyToUserVC-->
         <scene sceneID="YP3-3t-XmI">
             <objects>
-                <viewController id="fjK-MJ-VLD" userLabel="AddMoneyToUserVC" customClass="AddMoneyToUserVC" customModule="Pocket_Money" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddMoneyToUserVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fjK-MJ-VLD" userLabel="AddMoneyToUserVC" customClass="AddMoneyToUserVC" customModule="Pocket_Money" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DyG-lF-CDz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="NQt-2l-mTC" userLabel="Stack View 1">
-                                <rect key="frame" x="40" y="188" width="334" height="30"/>
+                                <rect key="frame" x="40" y="144" width="334" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add money to name pocket" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2X1-cF-XaH" userLabel="Name Label">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="30"/>
@@ -592,7 +683,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How much to add?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cQE-T9-SkP">
-                                <rect key="frame" x="107" y="248" width="200" height="70"/>
+                                <rect key="frame" x="107" y="224" width="200" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="A4y-8u-ZDv"/>
                                     <constraint firstAttribute="width" constant="200" id="UJF-lv-ebv"/>
@@ -601,7 +692,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2o5-ih-7So">
-                                <rect key="frame" x="157" y="348" width="100" height="50"/>
+                                <rect key="frame" x="157" y="344" width="100" height="50"/>
                                 <color key="backgroundColor" red="0.9478725791" green="0.6632034779" blue="0.23118436340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Qs-Yz-wL9"/>
@@ -614,72 +705,16 @@
                                     <action selector="addButtonPressed:" destination="fjK-MJ-VLD" eventType="touchUpInside" id="Jsy-tE-pJ9"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange round corner square" translatesAutoresizingMaskIntoConstraints="NO" id="TVG-nK-jIF">
-                                <rect key="frame" x="-10" y="551" width="434" height="415"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="415" id="CsJ-55-nqL"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="g0i-Qy-3DX">
-                                <rect key="frame" x="50" y="614" width="314" height="148"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="kmH-d5-K1R" userLabel="Stack View 3">
-                                        <rect key="frame" x="64" y="0.0" width="186" height="36"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name now has" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y61-y5-JXD" userLabel="Name Label2">
-                                                <rect key="frame" x="0.0" y="0.0" width="186" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afQ-7U-x6A" userLabel="Sum Label">
-                                        <rect key="frame" x="122" y="56" width="70" height="42"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in the pocket" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rC-Xz-YSV">
-                                        <rect key="frame" x="88" y="118" width="138.5" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuS-8O-u0e">
-                                <rect key="frame" x="244" y="88" width="150" height="70"/>
-                                <color key="backgroundColor" red="0.96841138599999999" green="0.67247221840000004" blue="0.28991965479999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="CQ2-cA-xMd"/>
-                                    <constraint firstAttribute="height" constant="70" id="zEG-f8-pNS"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Click here to add money constantly"/>
-                                <connections>
-                                    <segue destination="S5t-DL-AYM" kind="show" identifier="GoToAddByTimeVCIdentifier" id="l5G-vH-8es"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mM4-tf-gr4"/>
                         <color key="backgroundColor" red="1" green="0.93358598237157187" blue="0.46079488426844506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="2o5-ih-7So" firstAttribute="top" secondItem="cQE-T9-SkP" secondAttribute="bottom" constant="30" id="1bz-fa-242"/>
-                            <constraint firstItem="TVG-nK-jIF" firstAttribute="leading" secondItem="mM4-tf-gr4" secondAttribute="leading" constant="-10" id="9sW-qy-69y"/>
+                            <constraint firstItem="2o5-ih-7So" firstAttribute="top" secondItem="cQE-T9-SkP" secondAttribute="bottom" constant="50" id="1bz-fa-242"/>
                             <constraint firstItem="mM4-tf-gr4" firstAttribute="trailing" secondItem="NQt-2l-mTC" secondAttribute="trailing" constant="40" id="IP2-hQ-l4o"/>
-                            <constraint firstItem="TVG-nK-jIF" firstAttribute="trailing" secondItem="mM4-tf-gr4" secondAttribute="trailing" constant="10" id="ON0-xh-Q05"/>
-                            <constraint firstItem="mM4-tf-gr4" firstAttribute="trailing" secondItem="HuS-8O-u0e" secondAttribute="trailing" constant="20" id="Osz-uc-pXd"/>
                             <constraint firstItem="NQt-2l-mTC" firstAttribute="top" secondItem="mM4-tf-gr4" secondAttribute="top" constant="100" id="T26-dZ-6kE"/>
-                            <constraint firstAttribute="bottom" secondItem="TVG-nK-jIF" secondAttribute="bottom" constant="-70" id="U5k-Kz-I51"/>
                             <constraint firstItem="NQt-2l-mTC" firstAttribute="leading" secondItem="mM4-tf-gr4" secondAttribute="leading" constant="40" id="WWY-L7-xrC"/>
-                            <constraint firstItem="HuS-8O-u0e" firstAttribute="top" secondItem="mM4-tf-gr4" secondAttribute="top" id="cw1-lG-1CW"/>
-                            <constraint firstItem="mM4-tf-gr4" firstAttribute="bottom" secondItem="g0i-Qy-3DX" secondAttribute="bottom" constant="100" id="duS-PT-ef8"/>
-                            <constraint firstItem="mM4-tf-gr4" firstAttribute="trailing" secondItem="g0i-Qy-3DX" secondAttribute="trailing" constant="50" id="fCi-r6-2Zw"/>
                             <constraint firstItem="cQE-T9-SkP" firstAttribute="centerX" secondItem="DyG-lF-CDz" secondAttribute="centerX" id="fcL-37-jc9"/>
-                            <constraint firstItem="g0i-Qy-3DX" firstAttribute="leading" secondItem="mM4-tf-gr4" secondAttribute="leading" constant="50" id="gWa-hm-1k9"/>
-                            <constraint firstItem="cQE-T9-SkP" firstAttribute="top" secondItem="NQt-2l-mTC" secondAttribute="bottom" constant="30" id="tzf-YZ-Coy"/>
+                            <constraint firstItem="cQE-T9-SkP" firstAttribute="top" secondItem="NQt-2l-mTC" secondAttribute="bottom" constant="50" id="tzf-YZ-Coy"/>
                             <constraint firstItem="2o5-ih-7So" firstAttribute="centerX" secondItem="DyG-lF-CDz" secondAttribute="centerX" id="ylN-h9-uiM"/>
                         </constraints>
                     </view>
@@ -687,30 +722,28 @@
                     <connections>
                         <outlet property="amountTextField" destination="cQE-T9-SkP" id="J17-nb-Nj8"/>
                         <outlet property="nameLabel" destination="2X1-cF-XaH" id="HKB-12-MfA"/>
-                        <outlet property="nameLabel2" destination="Y61-y5-JXD" id="Idf-Fi-Yz8"/>
-                        <outlet property="sumLabel" destination="afQ-7U-x6A" id="fYl-zX-CiW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7M-6X-ig4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9700" y="-230"/>
+            <point key="canvasLocation" x="9698.5507246376819" y="-230.35714285714283"/>
         </scene>
         <!--AddByTimeVC-->
         <scene sceneID="mHZ-xa-NxB">
             <objects>
                 <viewController id="S5t-DL-AYM" userLabel="AddByTimeVC" customClass="AddByTimeVC" customModule="Pocket_Money" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Gs-wU-Hym">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money Constantly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DP4-BE-mKa">
-                                <rect key="frame" x="50" y="108" width="314" height="24"/>
+                                <rect key="frame" x="50" y="64" width="314" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount to add" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUj-9N-vmB">
-                                <rect key="frame" x="137" y="172" width="140" height="80"/>
+                                <rect key="frame" x="137" y="128" width="140" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Adc-6U-jKF"/>
                                     <constraint firstAttribute="width" constant="140" id="RTe-CY-AjX"/>
@@ -719,13 +752,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a day to start adding" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77u-3f-1od">
-                                <rect key="frame" x="97.5" y="295" width="219" height="20.5"/>
+                                <rect key="frame" x="97.5" y="251" width="219" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Rzf-CH-7QZ">
-                                <rect key="frame" x="5" y="325.5" width="404" height="30"/>
+                                <rect key="frame" x="5" y="281.5" width="404" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zng-Ug-nWc">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
@@ -816,7 +849,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JMZ-M3-83D">
-                                <rect key="frame" x="70" y="416" width="274" height="30"/>
+                                <rect key="frame" x="70" y="372" width="274" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6R-Oa-Sfa">
                                         <rect key="frame" x="0.0" y="0.0" width="65.5" height="30"/>
@@ -864,13 +897,13 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat every" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWJ-k6-BSM">
-                                <rect key="frame" x="157" y="385.5" width="100" height="20.5"/>
+                                <rect key="frame" x="157" y="341.5" width="100" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7NT-4O-OOK">
-                                <rect key="frame" x="172" y="567" width="70" height="40"/>
+                                <rect key="frame" x="172" y="523" width="70" height="40"/>
                                 <color key="backgroundColor" red="0.9478725791" green="0.6632034779" blue="0.23118436340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="uFO-JI-MnK"/>
@@ -886,7 +919,7 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b0b-HB-exD">
-                                <rect key="frame" x="182.5" y="506" width="51" height="31"/>
+                                <rect key="frame" x="182.5" y="462" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uNF-hC-otg"/>
@@ -932,7 +965,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QK2-jt-6Wt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10522" y="90"/>
+            <point key="canvasLocation" x="9699" y="563"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zYt-Bw-2zJ">
@@ -959,7 +992,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="orange round corner square" width="578" height="578"/>
         <image name="user icon" width="860" height="899"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

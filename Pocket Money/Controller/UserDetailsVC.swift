@@ -15,6 +15,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var sumLabel: UILabel!
+    @IBOutlet weak var addMoneyPicker: UIButton!
     
     let db = Firestore.firestore()
     var arrayOfDate: [String] = []
@@ -32,6 +33,10 @@ class UserDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addMoneyPicker.frame = CGRect(x: 160, y: 100, width: 70, height: 70)
+        addMoneyPicker.layer.cornerRadius = 0.5 * addMoneyPicker.bounds.size.width
+        addMoneyPicker.clipsToBounds = true
+          view.addSubview(addMoneyPicker)
         
 //        userPicture.layer.cornerRadius = 100
         userPicture.clipsToBounds = true
@@ -68,6 +73,7 @@ class UserDetailsVC: UIViewController {
                 print(error.localizedDescription)
             }else{
                 let userPicRef = doc?.data()?["pictureURL"] as? String
+                if userPicRef != "" {
                 let storage = Storage.storage().reference(forURL: userPicRef!)
                 storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
                     if let error = error {
@@ -75,8 +81,10 @@ class UserDetailsVC: UIViewController {
                         print(error.localizedDescription)
                     } else {
                         self.userPicture.image = UIImage(data: data!)!
-                   
+                        }
                     }
+                } else {
+                    self.userPicture.image = UIImage(named: "userIcon")!
                 }
             }
         }
@@ -128,19 +136,19 @@ class UserDetailsVC: UIViewController {
         importData()
     }
     
-    @IBAction func goToaddMoneyPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "GoToAddMoneyToUserVC", sender: self)
-        
-    }
+    
+
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addMoneyToUserVC = segue.destination as? AddMoneyToUserVC {
-            addMoneyToUserVC.nameToPass = nameLabel.text!
-            addMoneyToUserVC.sumToPass = sumLabel.text!
+        if let popUpButtonsVC = segue.destination as? PopUpButtonsVC {
+            popUpButtonsVC.nameToPass = nameLabel.text!
             
         }
     }
 }
+
+
 
 extension UserDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,10 +158,6 @@ extension UserDetailsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserDetailsCellIdentifier", for: indexPath) as! UserDetailsCell
-        
-        //        cell.dateLabel.text = dateArray[indexPath.row].dateMoneyAdded
-        //        cell.amountAddedLabel.text = String(dateArray[indexPath.row].amountAdded)
-        //        print(dateArray)
         
         cell.backgroundColor = UIColor(#colorLiteral(red: 1, green: 0.8856521249, blue: 0.1325125396, alpha: 1))
         

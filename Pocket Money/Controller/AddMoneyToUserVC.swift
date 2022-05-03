@@ -11,53 +11,43 @@ import Firebase
 class AddMoneyToUserVC: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var nameLabel2: UILabel!
-    @IBOutlet weak var sumLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
     
     var nameToPass: String = ""
-    var sumToPass: String = ""
-    var newSum = Int()
     
     let db = Firestore.firestore()
     var dateMoneyAdded = String()
     var amountToAdd = Int()
     var finalAmountOfMoneyToAddToSum = DateCalculate().finalAmountOfMoneyToAdd
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-
+        
         db.collection("users").document(nameToPass).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
             }else{
                 if doc?.data()?["sum"] != nil{
                     let data = doc?.data()?["sum"] as? Int
-                    self.updateUISum(sum: data ?? 0)
                 }
             }
         }
         
         nameLabel.text = "Add money to  \(nameToPass)  pocket"
-        nameLabel2.text = "\(nameToPass)  now has"
-        sumLabel.text = sumToPass
         
         amountTextField.keyboardType = .numberPad
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
         
-
-        //UI
-        let sum = Int(sumToPass)
-        let amountToAdd = Int(amountTextField.text!) ?? 0
-        let newSum = sum! + amountToAdd
-        amountTextField.text = ""
-        sumLabel.text = String(newSum)
         
-        //read from db
+        if amountTextField.text != ""{
+            amountToAdd = Int(amountTextField.text!)!
+        amountTextField.text = ""
+        
+        //read from db and transaction
         let sumReference = db.collection("users").document(nameToPass)
         db.runTransaction({ (transaction, errorPointer) -> Any? in
             let sfDocument: DocumentSnapshot
@@ -81,7 +71,7 @@ class AddMoneyToUserVC: UIViewController {
             }
             
             //update sum in db
-            transaction.updateData(["sum": oldSum + amountToAdd], forDocument: sumReference)
+            transaction.updateData(["sum": oldSum + self.amountToAdd], forDocument: sumReference)
             return nil
         }) { (object, error) in
             if let error = error {
@@ -89,87 +79,92 @@ class AddMoneyToUserVC: UIViewController {
             } else {
                 print("Transaction successfully committed!")
                 
-                self.updateUISum(sum: newSum)
+                //                self.updateUISum(sum: newSum)
                 
                 
                 let date = Date()
                 let formatter = DateFormatter()
                 formatter.timeZone = .current
                 formatter.locale = .current
-                formatter.dateFormat = "dd.MM.yyyy   HH:mm"
+                formatter.dateFormat = "MMM d, yyyy"
+//                dd.MM.yyyy   HH:mm
                 self.dateMoneyAdded = formatter.string(from: date)
                 
                 //set new collection "history"
                 UserDetailsVC().dateArray = []
                 sumReference.collection("history").addDocument(data: [
                     "date money added": self.dateMoneyAdded,
-                    "amount to add": amountToAdd,
+                    "amount to add": self.amountToAdd,
                     "date": Date().timeIntervalSince1970
-                   ]) { err in
+                ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = amountToAdd as? Int {
+                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = self.amountToAdd as? Int {
                             let newDate = DateAmount(dateMoneyAdded: dateMoneyAdded, amountAdded: amoundToAdd)
                             UserDetailsVC().dateArray.append(newDate)
                             
                         }
+                    }
+                    
+                    
                 }
-                
-                
-              
-                       
-                }
-   
+            }
                 
                 //notification center
                 NotificationCenter.default.post(name: Notification.Name("sumUpdate"), object: nil)
-                self.sumLabel.text = String(newSum)
                 
                 NotificationCenter.default.post(name: Notification.Name("dateUpdate"), object: nil)
-              
-                }
-        }
-        view.endEditing(true)
-
-        self.showToast(message: "Added!", font: .systemFont(ofSize: 12.0))
-
-    }
-    @objc func tap(sender: UITapGestureRecognizer){
-            print("tapped")
+                
+            }
             view.endEditing(true)
+            
+            self.showToast(message: "Added!", font: .systemFont(ofSize: 12.0))
+            
+            
+            dismiss(animated: true)
+        } else {
+            self.showToast(message: "Please enter amount", font: .systemFont(ofSize: 12.0))
+
+        }
+       
+    }
+        
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+        print("tapped")
+        view.endEditing(true)
     }
     
-    func updateUISum(sum: Int) {
-        sumLabel.text = String(sum)
-    }
-  
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let addByTimeVC = segue.destination as? AddByTimeVC {
-    addByTimeVC.nameToPass = nameToPass
-         }
+        if let addByTimeVC = segue.destination as? AddByTimeVC {
+            addByTimeVC.nameToPass = nameToPass
+        }
     }
+        
 }
 
 extension AddMoneyToUserVC {
-
-func showToast(message : String, font: UIFont) {
-
-    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-    toastLabel.backgroundColor = UIColor.green.withAlphaComponent(0.6)
-    toastLabel.textColor = UIColor.white
-    toastLabel.font = font
-    toastLabel.textAlignment = .center;
-    toastLabel.text = message
-    toastLabel.alpha = 3.0
-    toastLabel.layer.cornerRadius = 10;
-    toastLabel.clipsToBounds  =  true
-    self.view.addSubview(toastLabel)
-    UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-         toastLabel.alpha = 0.0
-    }, completion: {(isCompleted) in
-        toastLabel.removeFromSuperview()
-    })
-} }
+    
+    func showToast(message : String, font: UIFont) {
+        
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.green.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 3.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    } }

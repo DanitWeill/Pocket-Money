@@ -29,6 +29,7 @@
 		84C616D327B90B2700952350 /* UserDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C616D127B90B2700952350 /* UserDetailsCell.xib */; };
 		84C616D527B9185A00952350 /* DateAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D427B9185A00952350 /* DateAmount.swift */; };
 		84C616D727BE365400952350 /* AddUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C616D627BE365400952350 /* AddUserVC.swift */; };
+		84EC041F281FE58C000E2A82 /* PopUpButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC041E281FE58C000E2A82 /* PopUpButtonsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		84C616D127B90B2700952350 /* UserDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsCell.xib; sourceTree = "<group>"; };
 		84C616D427B9185A00952350 /* DateAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAmount.swift; sourceTree = "<group>"; };
 		84C616D627BE365400952350 /* AddUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserVC.swift; sourceTree = "<group>"; };
+		84EC041E281FE58C000E2A82 /* PopUpButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				844B13E527A93DF300C440A1 /* MainVC.swift */,
 				84C616D627BE365400952350 /* AddUserVC.swift */,
 				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
+				84EC041E281FE58C000E2A82 /* PopUpButtonsVC.swift */,
 				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
 				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 			);
@@ -280,6 +283,7 @@
 				844B13E827A93F7B00C440A1 /* User.swift in Sources */,
 				844B13EC27AA74EF00C440A1 /* UserCell.swift in Sources */,
 				844B13B027A91E0400C440A1 /* Pocket_Money.xcdatamodeld in Sources */,
+				84EC041F281FE58C000E2A82 /* PopUpButtonsVC.swift in Sources */,
 				844B13F127ABDDD800C440A1 /* UserDetailsVC.swift in Sources */,
 				844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */,
 				84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */,

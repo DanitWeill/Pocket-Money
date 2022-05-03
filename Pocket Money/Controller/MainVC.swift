@@ -237,13 +237,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         }
     }
     
-    //    func createNewUser(){
-    //        let newUser = User(name: name, sum: oldSum2 + self.finalAmountOfMoneyToAdd, cellColor: self.cellColor, picture: self.userImage)
-    //
-    //        self.users.append(newUser)
-    //        self.tableView.reloadData()
-    //    }
-    
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -253,15 +246,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
         
-       
-        
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
             
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let controller = storyboard.instantiateViewController(withIdentifier: "Home")
-//            self.present(controller, animated: true, completion: nil)
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
             {
                 self.present(vc, animated: true, completion: nil)
@@ -272,9 +260,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         
     }
     
-    
-    
 }
+
 
 extension MainVC: UITableViewDataSource {
     

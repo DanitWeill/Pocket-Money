@@ -38,8 +38,6 @@ class AddByTimeVC: UIViewController {
     var finalAmountToAdd = 0
     
     var nameToPass: String = ""
-    //    var dayToBegin: String = "sunday"
-    //    var dayUserChose: Int = 1
     var currentWeekday: Int = 1
     var daysToAdd = 0
     let addOneDay = Date.now.addingTimeInterval(86400)
@@ -53,7 +51,7 @@ class AddByTimeVC: UIViewController {
         super.viewDidLoad()
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-        
+    
     }
     
     @objc func tap(sender: UITapGestureRecognizer){
