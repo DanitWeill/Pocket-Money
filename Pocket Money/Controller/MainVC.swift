@@ -12,19 +12,24 @@ import SwipeCellKit
 
 class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
-    var users: [User] = []
+    var kids: [Kid] = []
     
     let date = Date()
     var timesToAdd = 0
-    var finalAmountOfMoneyToAdd = 0
+    var finalAmountOfMoneyToAddRecived = 0
     
     var name = String()
     var sum = Int()
     var oldSum2 = Int()
     var cellColor = UIColor(hexString: "#ffffff")
-    var userImage = UIImage()
+    var kidImage = UIImage()
+    
+    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
+    let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
+    var rate = Float()
     
     private var handle: AuthStateDidChangeListenerHandle?
     
@@ -32,24 +37,27 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     let db = Firestore.firestore()
     
-    var userIndex = Int()
+    var kidsIndex = Int()
     
-    
+    var currencyName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        menuButton.menu = addMenuItems()
+        
+        updateDefaultCurreny()
         
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if user == nil{
                 
                 
-              
+                
                 if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
                 {
                     self.present(vc, animated: true, completion: nil)
                 }
-                    
+                
                 
             }else{
                 
@@ -62,11 +70,16 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 
                 self.tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCellIdentifier")
                 
-                NotificationCenter.default.addObserver(self, selector: #selector(self.sumUpdateRecived), name: Notification.Name("newUserUpdate"), object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updateRecived), name: Notification.Name("newUserUpdate"), object: nil)
                 
-                NotificationCenter.default.addObserver(self, selector: #selector(self.sumUpdateRecived), name: Notification.Name("sumUpdate"), object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updateRecived), name: Notification.Name("sumUpdate"), object: nil)
                 
-                self.loadUsers()
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updateRecived), name: Notification.Name("currencyNameUpdate"), object: nil)
+                
+                
+                
+                
+                self.loadKids()
                 // stop animate
                 self.activityIndicator.stopAnimating()
                 UIApplication.shared.endIgnoringInteractionEvents()
@@ -79,14 +92,17 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     
     
-    @objc func sumUpdateRecived(){
-        
-        loadUsers()
+    @objc func updateRecived(){
+        updateDefaultCurreny()
+        loadKids()
         
     }
     
-    func loadUsers() {
+    func loadKids() {
         
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        //loading circle
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .gray
@@ -94,138 +110,102 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        self.users = []
-        db.collection("users").getDocuments { querySnapshot, error in
-            if let e = error {
-                print("Error getting documents: \(e)")
+        db.collection("families").document(uid).getDocument { doc, err in
+            if let err = err{
+                print(err.localizedDescription)
+            }else{
+                let currency = doc?.data()?["currency"] ?? "ILS"
                 
-            } else {
-                if let documents = querySnapshot?.documents {
+                
+                FetchCurrencyManager().fetchCoin(currencyName: currency as! String) { rateRecived in
+                    print("rate recived \(rateRecived)")
+                    self.rate = rateRecived
                     
-                    for document in documents {
+                }
+                
+                
+                
+                
+                self.kids = []
+                
+                self.db.collection("families").document(uid).collection("kids").getDocuments { querySnapshot, error in
+                    if let e = error {
+                        print("Error getting documents: \(e)")
                         
-                        let data = document.data()
-                        
-                        if let name = data["name"] as? String, let sum = data["sum"] as? Int {
+                    } else {
+                        if let documents = querySnapshot?.documents {
                             
-                            if document.data()["constant_amount_to_add"] != nil && document.data()["add_every"] != nil && document.data()["date_to_begin"] != nil{
+                            for document in documents {
                                 
-                                // Calculate how often to add money
-                                let constantAmountToAdd = document.data()["constant_amount_to_add"] as? Int ?? 0
-                                let addEvery = document.data()["add_every"] as? Int ?? 0
-                                //                                let oldSum = sum ?? 0
-                                let dateToBegin = document.data()["date_to_begin"] as! TimeInterval
-                                let now = self.date.timeIntervalSince1970
+                                let data = document.data()
                                 
-                                if dateToBegin == 0 && addEvery == 0 && constantAmountToAdd == 0{
-                                    self.finalAmountOfMoneyToAdd = 0
-                                } else if
-                                    now < dateToBegin {
-                                    // number of days between now to date to begin as int
-                                    self.timesToAdd = Int((dateToBegin - now) / 86400)
-                                    self.finalAmountOfMoneyToAdd = self.timesToAdd / addEvery * constantAmountToAdd
+                                if let name = data["name"] as? String, let sum = data["sum"] as? Float {
                                     
-                                } else if now > dateToBegin {
-                                    self.timesToAdd = Int((dateToBegin + now) / 86400)
-                                    self.finalAmountOfMoneyToAdd = self.timesToAdd / addEvery * constantAmountToAdd
                                     
-                                }
-                                
-                                self.db.collection("users").document(name).setData(["final_amount_to_add" : self.finalAmountOfMoneyToAdd], merge: true) { err in
-                                    if let err = err {
-                                        print("Error writing document: \(err)")
+                                    let constantAmountToAdd = document.data()["constant_amount_to_add"] as? Int ?? 0
+                                    let addEvery = document.data()["add_every"] as? Int ?? 0
+                                    let dateToBegin = document.data()["date_to_begin"] as! TimeInterval
+                                    
+                                    DateCalculate().dateCalculate(userName: name, constantAmountToAdd: constantAmountToAdd, addEvery: addEvery, dateToBegin: dateToBegin) { finalAmountOfMoneyToAdd in
+                                        self.finalAmountOfMoneyToAddRecived = finalAmountOfMoneyToAdd
+                                    }
+                                    
+                                    //                                        // Calculate how often to add money
+                                    //
+                                    
+                                    
+                                    
+                                    
+                                    // grab from db the cell color & picture
+                                    if document.data()["cellColor"] as? String != nil {
+                                        let colorHexString = document.data()["cellColor"] as! String
+                                        self.cellColor = UIColor(hexString: "\(colorHexString)")
                                         
-                                    } else {
                                         
-                                        let sumReference = self.db.collection("users").document(name)
-                                        
-                                        self.db.runTransaction({ (transaction, errorPointer) -> Any? in
-                                            let sfDocument: DocumentSnapshot
-                                            do {
-                                                try sfDocument = transaction.getDocument(sumReference)
-                                            } catch let fetchError as NSError {
-                                                errorPointer?.pointee = fetchError
-                                                return nil
-                                            }
-                                            
-                                            guard let oldSum = sfDocument.data()?["sum"] as? Int else {
-                                                let error = NSError(
-                                                    domain: "AppErrorDomain",
-                                                    code: -1,
-                                                    userInfo: [
-                                                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
-                                                    ]
-                                                )
-                                                errorPointer?.pointee = error
-                                                return nil
-                                            }
-                                            
-                                            
-                                            transaction.updateData(["sum": oldSum + self.finalAmountOfMoneyToAdd], forDocument: sumReference)
-                                            return nil
-                                        }) { (object, error) in
-                                            if let error = error {
-                                                print("Transaction failed: \(error)")
-                                            } else {
-                                                print("Transaction finalSum successfully committed!")
-                                                
-                                                
-                                                // grab from db the cell color & picture
-                                                if document.data()["cellColor"] as? String != nil {
+                                        if document.data()["pictureURL"] as? String != "" {
+                                            let imageURL = document.data()["pictureURL"] as? String
+                                            let storage = Storage.storage().reference(forURL: imageURL!)
+                                            storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                                if let error = error {
+                                                    self.kidImage = UIImage(named: "userIcon")!
+                                                    print(error.localizedDescription)
+                                                    
+                                                    let newUser = Kid(name: name, sum: Float(sum), cellColor: self.cellColor, picture: self.kidImage)
+                                                    
+                                                    self.kids.append(newUser)
+                                                    self.tableView.reloadData()
+                                                    
+                                                    // stop animate
+                                                    self.activityIndicator.stopAnimating()
+                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                                } else {
                                                     let colorHexString = document.data()["cellColor"] as! String
                                                     self.cellColor = UIColor(hexString: "\(colorHexString)")
                                                     
-                                                    print("=====================")
-                                                    print("cell color \(colorHexString)")
-                                                    print("cell color \(self.cellColor)")
+                                                    self.kidImage = UIImage(data: data!)!
                                                     
-                                                    if document.data()["pictureURL"] as? String != "" {
-                                                        let imageURL = document.data()["pictureURL"] as? String
-                                                        let storage = Storage.storage().reference(forURL: imageURL!)
-                                                        storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                                                            if let error = error {
-                                                                self.userImage = UIImage(named: "userIcon")!
-                                                                print(error.localizedDescription)
-                                                                
-                                                                let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
-                                                                
-                                                                self.users.append(newUser)
-                                                                self.tableView.reloadData()
-                                                                
-                                                                // stop animate
-                                                                self.activityIndicator.stopAnimating()
-                                                                UIApplication.shared.endIgnoringInteractionEvents()
-                                                            } else {
-                                                                let colorHexString = document.data()["cellColor"] as! String
-                                                                self.cellColor = UIColor(hexString: "\(colorHexString)")
-                                                                
-                                                                self.userImage = UIImage(data: data!)!
-                                                                
-                                                                let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
-                                                                
-                                                                self.users.append(newUser)
-                                                                self.tableView.reloadData()
-                                                                
-                                                                // stop animate
-                                                                self.activityIndicator.stopAnimating()
-                                                                UIApplication.shared.endIgnoringInteractionEvents()
-                                                            }
-                                                        }
-                                                        
-                                                    }else{
-                                                        self.userImage = UIImage(named: "userIcon")!
-                                                        
-                                                        let newUser = User(name: name, sum: sum, cellColor: self.cellColor, picture: self.userImage)
-                                                        
-                                                        self.users.append(newUser)
-                                                        self.tableView.reloadData()
-                                                        
-                                                        // stop animate
-                                                        self.activityIndicator.stopAnimating()
-                                                        UIApplication.shared.endIgnoringInteractionEvents()
-                                                    }
+                                                    let newUser = Kid(name: name, sum: Float(sum), cellColor: self.cellColor, picture: self.kidImage)
+                                                    
+                                                    self.kids.append(newUser)
+                                                    self.tableView.reloadData()
+                                                    
+                                                    // stop animate
+                                                    self.activityIndicator.stopAnimating()
+                                                    UIApplication.shared.endIgnoringInteractionEvents()
                                                 }
                                             }
+                                            
+                                        }else{
+                                            self.kidImage = UIImage(named: "userIcon")!
+                                            
+                                            let newUser = Kid(name: name, sum: Float(sum), cellColor: self.cellColor, picture: self.kidImage)
+                                            
+                                            self.kids.append(newUser)
+                                            self.tableView.reloadData()
+                                            
+                                            // stop animate
+                                            self.activityIndicator.stopAnimating()
+                                            UIApplication.shared.endIgnoringInteractionEvents()
                                         }
                                     }
                                 }
@@ -235,6 +215,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 }
             }
         }
+        
     }
     
     
@@ -244,8 +225,26 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         
     }
     
-    @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
-        
+    
+    func addMenuItems() -> UIMenu{
+        let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
+            UIAction(title: "Currency", handler: { (_) in
+                print("Currency")
+                self.performSegue(withIdentifier: "goToCurrency", sender: self)
+            }),
+            
+            UIAction(title: "Sign Out", image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), attributes: .destructive, handler: { (_) in
+                print("Sign Out")
+                self.signOut()
+                
+            })
+            
+        ])
+        return menuItems
+    }
+    
+    
+    func signOut(){
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -257,6 +256,45 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
+    }
+    
+    func updateDefaultCurreny(){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        db.collection("families").document(uid).getDocument(completion: { document, error in
+            if let error = error {
+                print(error)
+                self.db.collection("families").document(uid).setData([
+                    "currency": "ILS"
+                ])
+                self.currencyName = "ILS"
+            }
+            
+            if document?.exists ?? false {
+                print("exist")
+                self.currencyName = document?.data()?["currency"] as! String
+            } else {
+                print("not exist")
+                self.db.collection("families").document(uid).setData([
+                    "currency": "ILS"
+                ])
+                self.currencyName = "ILS"
+            }
+            
+            print("=======================")
+            print(self.currencyName)
+        })
+        
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let userDetailsVC = segue.destination as? UserDetailsVC {
+            userDetailsVC.kidsStringToPass = kids
+            userDetailsVC.kidsIndex = kidsIndex
+            userDetailsVC.currencyToPass = currencyName
+        }
         
     }
     
@@ -266,7 +304,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
 extension MainVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return kids.count
     }
     
     
@@ -277,17 +315,19 @@ extension MainVC: UITableViewDataSource {
         
         cell.delegate = self
         
-        cell.nameLabel.text = users[indexPath.row].name
-        cell.sumLabel.text = String(users[indexPath.row].sum)
-        cell.color.backgroundColor = users[indexPath.row].cellColor
-        cell.userPicture.image = users[indexPath.row].picture
+        cell.nameLabel.text = kids[indexPath.row].name
+        cell.sumLabel.text = String(kids[indexPath.row].sum)
+        //        String(Float(kids[indexPath.row].sum) * self.rate)
+        cell.color.backgroundColor = kids[indexPath.row].cellColor
+        cell.userPicture.image = kids[indexPath.row].picture
+        cell.currencyLabel.text = currencyName
         
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        userIndex = indexPath.row
+        kidsIndex = indexPath.row
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
         performSegue(withIdentifier: "goToUserDetailsVC", sender: self)
@@ -295,12 +335,7 @@ extension MainVC: UITableViewDataSource {
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let userDetailsVC = segue.destination as? UserDetailsVC {
-            userDetailsVC.usersStringToPass = users
-            userDetailsVC.userIndex = userIndex
-        }
-    }
+    
     
     
 }
@@ -314,15 +349,17 @@ extension MainVC: SwipeTableViewCellDelegate {
             // handle action by updating model with deletion
             print("item deleted")
             
-            self.db.collection("users").document(self.users[indexPath.row].name).delete() { err in
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+            
+            self.db.collection("families").document(uid).collection("kids").document(self.kids[indexPath.row].name).delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
                 } else {
                     print("Document successfully removed!")
                 }
             }
-            self.users = []
-            self.loadUsers()
+            self.kids = []
+            self.loadKids()
             tableView.reloadData()
         }
         
@@ -333,15 +370,6 @@ extension MainVC: SwipeTableViewCellDelegate {
     }
     
 }
-//
-//extension String {
-//    func toImage() -> UIImage? {
-//        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
-//            return UIImage(data: data)
-//        }
-//        return nil
-//    }
-//}
 
 extension UIColor {
     convenience init(hexString: String) {

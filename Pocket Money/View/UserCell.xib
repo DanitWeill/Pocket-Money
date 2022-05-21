@@ -30,8 +30,8 @@
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="ubS-cZ-ghb"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="GV5-xy-kL6">
-                                        <rect key="frame" x="80" y="27" width="332" height="20.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GV5-xy-kL6">
+                                        <rect key="frame" x="80" y="27" width="312" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZ5-UM-mYx" userLabel="Name Label" customClass="Usercell">
                                                 <rect key="frame" x="0.0" y="0.0" width="45.5" height="20.5"/>
@@ -40,14 +40,29 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sum" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHl-B8-Z8n" userLabel="Sum Label" customClass="Usercell">
-                                                <rect key="frame" x="297" y="0.0" width="35" height="20.5"/>
+                                                <rect key="frame" x="225" y="0.0" width="35" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="coin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJd-vF-oYK" userLabel="Currency Label">
+                                                <rect key="frame" x="280" y="0.0" width="32" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vJd-vF-oYK" firstAttribute="leading" secondItem="mHl-B8-Z8n" secondAttribute="trailing" constant="20" id="5E6-rE-50P"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="GV5-xy-kL6" secondAttribute="bottom" constant="26.5" id="HLT-SZ-Vdo"/>
+                                    <constraint firstItem="GV5-xy-kL6" firstAttribute="leading" secondItem="aAR-wK-y7u" secondAttribute="trailing" constant="20" id="Qk4-sK-DOu"/>
+                                    <constraint firstItem="GV5-xy-kL6" firstAttribute="top" secondItem="alV-nq-W8U" secondAttribute="top" constant="27" id="bSE-5w-9J3"/>
+                                    <constraint firstAttribute="trailing" secondItem="GV5-xy-kL6" secondAttribute="trailing" constant="20" id="jaf-Rg-KKa"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
@@ -70,6 +85,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="color" destination="a0x-Zm-bqB" id="1TV-Qd-khe"/>
+                <outlet property="currencyLabel" destination="vJd-vF-oYK" id="YqN-5s-84N"/>
                 <outlet property="nameLabel" destination="wZ5-UM-mYx" id="rGW-5G-zKX"/>
                 <outlet property="sumLabel" destination="mHl-B8-Z8n" id="Q28-as-VoN"/>
                 <outlet property="userPicture" destination="aAR-wK-y7u" id="MGs-Em-nAD"/>

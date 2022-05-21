@@ -32,13 +32,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currency" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2u-JO-lhi" userLabel="currency label">
+                                <rect key="frame" x="248.5" y="10" width="77.5" height="79"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.98157067310000001" green="0.88980110209999996" blue="0.32543618639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="JT2-yk-VIS" secondAttribute="bottom" constant="10" id="0oA-y9-Z8e"/>
                             <constraint firstAttribute="bottom" secondItem="SDZ-Ks-aVf" secondAttribute="bottom" constant="10" id="3jo-FQ-KSs"/>
                             <constraint firstItem="JT2-yk-VIS" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="10" id="4ZO-62-KTr"/>
+                            <constraint firstItem="n2u-JO-lhi" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="10" id="5SQ-1d-yrC"/>
+                            <constraint firstItem="n2u-JO-lhi" firstAttribute="leading" secondItem="SDZ-Ks-aVf" secondAttribute="trailing" constant="15" id="Ay7-6m-BS3"/>
                             <constraint firstItem="SDZ-Ks-aVf" firstAttribute="leading" secondItem="JT2-yk-VIS" secondAttribute="trailing" constant="40" id="EOJ-UT-x9A"/>
+                            <constraint firstAttribute="bottom" secondItem="n2u-JO-lhi" secondAttribute="bottom" constant="10" id="FXE-36-e3y"/>
                             <constraint firstItem="SDZ-Ks-aVf" firstAttribute="top" secondItem="Zn6-ye-clc" secondAttribute="top" constant="10" id="LsE-Vv-Idy"/>
                             <constraint firstItem="JT2-yk-VIS" firstAttribute="leading" secondItem="Zn6-ye-clc" secondAttribute="leading" constant="30" id="Za6-jB-LnI"/>
                         </constraints>
@@ -56,6 +65,7 @@
             <size key="customSize" width="447" height="99"/>
             <connections>
                 <outlet property="amountAddedLabel" destination="SDZ-Ks-aVf" id="tzm-Ht-c2P"/>
+                <outlet property="currencyLabel" destination="n2u-JO-lhi" id="2Ee-dP-MXK"/>
                 <outlet property="dateLabel" destination="JT2-yk-VIS" id="bJL-Le-7Hp"/>
             </connections>
             <point key="canvasLocation" x="431.15942028985512" y="111.49553571428571"/>

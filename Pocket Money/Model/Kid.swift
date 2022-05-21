@@ -9,10 +9,9 @@ import Foundation
 import UIKit
 import Firebase
 
-struct User {
+struct Kid {
     let name: String
-    var sum: Int
-//    var coin: Int
+    var sum: Float
     let cellColor: UIColor
     var picture: UIImage
 }

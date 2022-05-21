@@ -12,6 +12,7 @@ class UserDetailsCell: UITableViewCell {
    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountAddedLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
     
     
     override func awakeFromNib() {

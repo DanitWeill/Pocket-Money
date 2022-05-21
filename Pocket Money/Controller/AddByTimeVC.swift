@@ -60,7 +60,9 @@ class AddByTimeVC: UIViewController {
     }
     
     func setConstantAmountToAdd(){
-        db.collection("users").document(nameToPass).updateData([
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
             "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0")])
         { err in
             if let err = err {
@@ -88,7 +90,9 @@ class AddByTimeVC: UIViewController {
         dateToBeginString = formatter.string(from: dateToBeginDate)
         let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
         
-        db.collection("users").document(nameToPass).updateData([
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
             "day_to_begin": dayToBegin, "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
         { err in
             if let err = err {
@@ -106,7 +110,9 @@ class AddByTimeVC: UIViewController {
     
     func setAddEvery() {
         
-        db.collection("users").document(nameToPass).updateData([
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
             "add_every": addEvery])
         { err in
             if let err = err {

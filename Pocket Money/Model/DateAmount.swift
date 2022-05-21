@@ -9,12 +9,8 @@ import Foundation
 
 struct DateAmount {
     var dateMoneyAdded: String
-    var amountAdded: Int
+    var amountAdded: Float
+    var currencyAdded: String
     
     
 }
-
-
-
-
-//var dateDict : [String: Int] = ["date": 0]

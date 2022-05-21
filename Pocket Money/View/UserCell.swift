@@ -14,7 +14,7 @@ class UserCell: SwipeTableViewCell {
     @IBOutlet weak var color: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
-    @IBOutlet weak var coinLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
     
 
     override func awakeFromNib() {

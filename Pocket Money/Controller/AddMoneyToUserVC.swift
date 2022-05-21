@@ -12,20 +12,24 @@ class AddMoneyToUserVC: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var currencyLabel: UILabel!
     
     var nameToPass: String = ""
     
     let db = Firestore.firestore()
     var dateMoneyAdded = String()
-    var amountToAdd = Int()
-    var finalAmountOfMoneyToAddToSum = DateCalculate().finalAmountOfMoneyToAdd
+    var amountAdded = Int()
+    var currency = "ILS"
+//    var finalAmountOfMoneyToAddToSum = DateCalculate().finalAmountOfMoneyToAdd
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
-        db.collection("users").document(nameToPass).getDocument { doc, err in
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(nameToPass).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
             }else{
@@ -38,17 +42,28 @@ class AddMoneyToUserVC: UIViewController {
         nameLabel.text = "Add money to  \(nameToPass)  pocket"
         
         amountTextField.keyboardType = .numberPad
+        
+      
+        db.collection("families").document(uid).getDocument { doc, err in
+            if let err = err{
+                print(err)
+            } else {
+                self.currency = doc?.data()?["currency"] as? String ?? "ILS"
+                self.currencyLabel.text = self.currency
+            }
+        }
     }
-    
     @IBAction func addButtonPressed(_ sender: UIButton) {
         
         
         if amountTextField.text != ""{
-            amountToAdd = Int(amountTextField.text!)!
+            amountAdded = Int(amountTextField.text!)!
         amountTextField.text = ""
         
         //read from db and transaction
-        let sumReference = db.collection("users").document(nameToPass)
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        let sumReference = db.collection("families").document(uid).collection("kids").document(nameToPass)
         db.runTransaction({ (transaction, errorPointer) -> Any? in
             let sfDocument: DocumentSnapshot
             do {
@@ -71,7 +86,7 @@ class AddMoneyToUserVC: UIViewController {
             }
             
             //update sum in db
-            transaction.updateData(["sum": oldSum + self.amountToAdd], forDocument: sumReference)
+            transaction.updateData(["sum": oldSum + self.amountAdded], forDocument: sumReference)
             return nil
         }) { (object, error) in
             if let error = error {
@@ -79,7 +94,6 @@ class AddMoneyToUserVC: UIViewController {
             } else {
                 print("Transaction successfully committed!")
                 
-                //                self.updateUISum(sum: newSum)
                 
                 
                 let date = Date()
@@ -94,15 +108,16 @@ class AddMoneyToUserVC: UIViewController {
                 UserDetailsVC().dateArray = []
                 sumReference.collection("history").addDocument(data: [
                     "date money added": self.dateMoneyAdded,
-                    "amount to add": self.amountToAdd,
-                    "date": Date().timeIntervalSince1970
+                    "amount added": self.amountAdded,
+                    "date": Date().timeIntervalSince1970,
+                    "currency": self.currency
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = self.amountToAdd as? Int {
-                            let newDate = DateAmount(dateMoneyAdded: dateMoneyAdded, amountAdded: amoundToAdd)
+                        if let dateMoneyAdded = self.dateMoneyAdded as? String, let amoundToAdd = self.amountAdded as? Int, let currencyAdded = self.currency as? String {
+                            let newDate = DateAmount(dateMoneyAdded: dateMoneyAdded, amountAdded: Float(amoundToAdd), currencyAdded: currencyAdded)
                             UserDetailsVC().dateArray.append(newDate)
                             
                         }

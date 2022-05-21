@@ -13,18 +13,22 @@ class UserDetailsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var userPicture: UIImageView!
+    @IBOutlet weak var kidPicture: UIImageView!
     @IBOutlet weak var sumLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var addMoneyPicker: UIButton!
     
     let db = Firestore.firestore()
+    
     var arrayOfDate: [String] = []
     var arrayOfAmount: [Int] = []
+    var arrayOfCurrency: [String] = []
     var dateArray: [DateAmount] = []
     var numOfCells = 0
     
-    var usersStringToPass: [User] = []
-    var userIndex = 0
+    var kidsStringToPass: [Kid] = []
+    var kidsIndex = 0
+    var currencyToPass = String()
     
     let addMoneyToUserVC = AddMoneyToUserVC()
     
@@ -39,10 +43,11 @@ class UserDetailsVC: UIViewController {
           view.addSubview(addMoneyPicker)
         
 //        userPicture.layer.cornerRadius = 100
-        userPicture.clipsToBounds = true
+        kidPicture.clipsToBounds = true
         importData()
         
-        nameLabel.text = usersStringToPass[userIndex].name
+        nameLabel.text = kidsStringToPass[kidsIndex].name
+        currencyLabel.text = currencyToPass
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserDetailsCell", bundle: nil), forCellReuseIdentifier: "UserDetailsCellIdentifier")
@@ -55,7 +60,9 @@ class UserDetailsVC: UIViewController {
     
     
     func importData(){
-        db.collection("users").document(usersStringToPass[userIndex].name).getDocument { doc, err in
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(kidsStringToPass[kidsIndex].name).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
             }else{
@@ -68,7 +75,7 @@ class UserDetailsVC: UIViewController {
             }
         }
         
-        db.collection("users").document(usersStringToPass[userIndex].name).getDocument { doc, error in
+        db.collection("families").document(uid).collection("kids").document(kidsStringToPass[kidsIndex].name).getDocument { doc, error in
             if let error = error{
                 print(error.localizedDescription)
             }else{
@@ -77,39 +84,45 @@ class UserDetailsVC: UIViewController {
                 let storage = Storage.storage().reference(forURL: userPicRef!)
                 storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
                     if let error = error {
-                        self.userPicture.image = UIImage(named: "userIcon")!
+                        self.kidPicture.image = UIImage(named: "userIcon")!
                         print(error.localizedDescription)
                     } else {
-                        self.userPicture.image = UIImage(data: data!)!
+                        self.kidPicture.image = UIImage(data: data!)!
                         }
                     }
                 } else {
-                    self.userPicture.image = UIImage(named: "userIcon")!
+                    self.kidPicture.image = UIImage(named: "userIcon")!
                 }
             }
         }
         
-        db.collection("users").document(usersStringToPass[userIndex].name).collection("history").order(by: "date").getDocuments { docs, err in
+        db.collection("families").document(uid).collection("kids").document(kidsStringToPass[kidsIndex].name).collection("history").order(by: "date").getDocuments { docs, err in
             if let e = err{
                 print(e)
             } else {
                 
                 self.arrayOfDate = []
                 self.arrayOfAmount = []
+                self.arrayOfCurrency = []
                 
                 if docs?.count ?? 0 > 0{
                     for i in 0...docs!.count-1{
                         
                         let date = docs?.documents[i]["date money added"] as? String
-                        let amount = docs?.documents[i]["amount to add"] as? Int
+                        let amount = docs?.documents[i]["amount added"] as? Int
+                        let currency = docs?.documents[i]["currency"] as? String
                         
                         self.arrayOfDate.append(date ?? "")
                         self.arrayOfAmount.append(amount ?? 0)
+                        self.arrayOfCurrency.append(currency ?? "")
+
                         
                     }
                 }
                 self.arrayOfDate.reverse()
                 self.arrayOfAmount.reverse()
+                self.arrayOfCurrency.reverse()
+
                 
                 self.tableView.reloadData()
                 
@@ -118,7 +131,9 @@ class UserDetailsVC: UIViewController {
     }
     
     @objc func sumUpdateRecived(){
-        db.collection("users").document(usersStringToPass[userIndex].name).getDocument { doc, err in
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+
+        db.collection("families").document(uid).collection("kids").document(kidsStringToPass[kidsIndex].name).getDocument { doc, err in
             if let err = err{
                 print(err.localizedDescription)
             }else{
@@ -130,6 +145,10 @@ class UserDetailsVC: UIViewController {
                 
             }
         }
+    }
+    
+    func updateCurrency(){
+        
     }
     
     @objc func dateRecived(){
@@ -163,6 +182,7 @@ extension UserDetailsVC: UITableViewDataSource {
         
         cell.dateLabel.text = arrayOfDate[indexPath.row]
         cell.amountAddedLabel.text = String(arrayOfAmount[indexPath.row])
+        cell.currencyLabel.text = arrayOfCurrency[indexPath.row]
         
         return cell
     }
