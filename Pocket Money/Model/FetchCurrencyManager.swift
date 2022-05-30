@@ -10,7 +10,6 @@ import Foundation
 class FetchCurrencyManager {
     let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
     let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
-//    var currencyName = "ILS"
     var rateToPass = Float()
     
     func fetchCoin(currencyName: String, completion: @escaping (Float) -> Void) {
@@ -22,7 +21,7 @@ class FetchCurrencyManager {
             
         
             completion(self.rateToPass)
-//            print("====== 4 completion rate to pass \(self.rateToPass)")
+            print("====== 4 completion rate to pass \(self.rateToPass)")
         }
         
     }
@@ -56,8 +55,8 @@ class FetchCurrencyManager {
         do{
         let decodedData = try decoder.decode(CurrencyData.self, from: coinData)
             rateToPass = decodedData.rate
-            print("3  decoded rate \(decodedData.rate)")
-            print("====================================================")
+//            print("3  decoded rate \(decodedData.rate)")
+//            print("====================================================")
         }catch{
             print(error)
         }

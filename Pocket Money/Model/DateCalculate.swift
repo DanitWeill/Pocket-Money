@@ -20,13 +20,11 @@ class DateCalculate{
     func dateCalculate(userName : String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void){
       
         // Calculate how often to add money
-
         let now = self.date.timeIntervalSince1970
         
         if dateToBegin == 0 && addEvery == 0 && constantAmountToAdd == 0{
             self.finalAmountOfMoneyToAdd = 0
-        } else if
-            now < dateToBegin {
+        } else if now < dateToBegin {
             // number of days between now to date to begin as int
             self.timesToAdd = Int(dateToBegin - now) / 86400
             self.finalAmountOfMoneyToAdd = self.timesToAdd / addEvery * constantAmountToAdd

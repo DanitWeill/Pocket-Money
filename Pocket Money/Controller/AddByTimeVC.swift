@@ -88,12 +88,12 @@ class AddByTimeVC: UIViewController {
         
         dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
         dateToBeginString = formatter.string(from: dateToBeginDate)
-        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
+//        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
 
         db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-            "day_to_begin": dayToBegin, "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
+             "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
         { err in
             if let err = err {
                 print("Error writing document: \(err)")

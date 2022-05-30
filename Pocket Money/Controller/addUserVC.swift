@@ -13,13 +13,16 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldSum: UITextField!
+    @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var selectColorButton: UIButton!
     @IBOutlet weak var userPicture: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var errorLabel: UILabel!
     
+    let db = Firestore.firestore()
+
+    var currencyName = "ILS"
     let storage = Storage.storage().reference()
-    
     var picturePath = String()
     var cellColor = UIColor(hexString: "#ffe747")
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -29,11 +32,15 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAnywhere)))
         
-        textFieldName.placeholder = "New user name"
-        textFieldSum.keyboardType = .alphabet
+        textFieldName.placeholder = "Kid name"
+        textFieldName.keyboardType = .alphabet
         
-        textFieldSum.placeholder = "New amount of money (numbers only)"
+        
+        textFieldSum.placeholder = "Starting amount"
         textFieldSum.keyboardType = .numberPad
+        checkCurrentCurrency()
+        
+        errorLabel.isHidden = true
         
         selectColorButton.addTarget(self, action: #selector(didTapSelectColor), for: .touchUpInside )
         
@@ -43,34 +50,38 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         let tapedUserPicture = UITapGestureRecognizer(target: self, action: #selector(tapedUserPic))
         userPicture.isUserInteractionEnabled = true
         userPicture.addGestureRecognizer(tapedUserPicture)
-        
-        
     }
     
+    
+    func checkCurrentCurrency() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        db.collection("families").document(uid).getDocument { document, error in
+            if let error = error {
+                print(error)
+            }
+            self.currencyName = document?.data()?["currency"] as! String
+            self.currencyLabel.text = self.currencyName
+        }
+    }
+    
+    //color
     @objc func didTapSelectColor() {
         let colorPickerVC = UIColorPickerViewController()
         colorPickerVC.delegate = self
         present(colorPickerVC, animated: true )
-        
     }
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         cellColor = viewController.selectedColor
-        
-        
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         cellColor = viewController.selectedColor
         selectColorButton.backgroundColor = cellColor
-        
-        //        print("===================")
-        //        print(cellColor.htmlRGBColor)
     }
     
     
     @objc func tapedUserPic() {
-        
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
@@ -83,10 +94,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
-        
     }
-    
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         dismiss(animated: true, completion: nil)
@@ -108,11 +116,9 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
                 return
             }
             
-            
             self.storage.child(self.picturePath).downloadURL { url, error in
                 guard let url = url, error == nil else {return}
                 self.picturePath = url.absoluteString
-                
                 DispatchQueue.main.async {
                     self.userPicture.image = image
                     
@@ -131,9 +137,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
             
             self.progressView.progress = Float(picLoadThere)
             if picLoadThere == 1.0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5){
                     self.progressView.isHidden = true
-
                 }
             }
         }
@@ -155,48 +160,48 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
         if textFieldName.text != "" && textFieldSum.text != "" {
             
-        if let userName = self.textFieldName.text, let userSum = Int(self.textFieldSum.text!) {
+            if let userName = self.textFieldName.text, let userSum = Float(self.textFieldSum.text!) {
             let db = Firestore.firestore()
-            
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+
+
             // Add a new document in collection "users"
-            db.collection("users").document(userName).setData([
+            db.collection("families").document(uid).collection("kids").document(userName).setData([
                 "name": userName,
                 "sum": userSum,
-                "cellColor": cellColor.htmlRGBColor,
-                "pictureURL": picturePath,
+                "cellColor": self.cellColor.htmlRGBColor,
+                "pictureURL": self.picturePath,
                 "add_every": 0,
                 "constant_amount_to_add": 0,
                 "date_to_begin": 0])
             { err in
                 if let err = err {
                     print("Error writing document: \(err)")
-                    //what will happen if the name and sum are nil
-                    //create a popping messege
                 } else {
                     print("Document successfully written!")
                     print(userSum)
                     print(userName)
-                    MainVC().users = []
+                    MainVC().kids = []
                     
                     NotificationCenter.default.post(name: Notification.Name("newUserUpdate"), object: nil)
                     
                 }
             }
-            _ = navigationController?.popViewController(animated: true)
-        }
+                //dismiss to mainvc
+                _ = self.navigationController?.popViewController(animated: true)
+                }
         } else {
+        
             print("please fill in name and sum")
+            errorLabel.isHidden = false
             errorLabel.text = "Please fill in Name and Sum"
             
-            // name and sum vibrate
-            // do nothing
+            //vibrate
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+            feedbackGenerator.impactOccurred()
+           
         }
-        
-        
-        
     }
-    
-    
     
     
 }

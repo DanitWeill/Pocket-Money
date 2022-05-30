@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import SwiftUI
 
 class UserDetailsVC: UIViewController {
     

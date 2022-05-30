@@ -146,11 +146,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                     let addEvery = document.data()["add_every"] as? Int ?? 0
                                     let dateToBegin = document.data()["date_to_begin"] as! TimeInterval
                                     
-                                    DateCalculate().dateCalculate(userName: name, constantAmountToAdd: constantAmountToAdd, addEvery: addEvery, dateToBegin: dateToBegin) { finalAmountOfMoneyToAdd in
-                                        self.finalAmountOfMoneyToAddRecived = finalAmountOfMoneyToAdd
+                                    DateCalculate().dateCalculate(userName: name, constantAmountToAdd: constantAmountToAdd, addEvery: addEvery, dateToBegin: dateToBegin) { finalAmountRecived in
+                                        self.finalAmountOfMoneyToAddRecived = finalAmountRecived
+                                        print("++++++ final amount recived \(finalAmountRecived)")
                                     }
                                     
-                                    //                                        // Calculate how often to add money
+                                    //           // Calculate how often to add money
                                     //
                                     
                                     
