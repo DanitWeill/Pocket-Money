@@ -195,7 +195,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                     UIApplication.shared.endIgnoringInteractionEvents()
                                                 }
                                             }
-                                            
+                                    
                                         }else{
                                             self.kidImage = UIImage(named: "userIcon")!
                                             
