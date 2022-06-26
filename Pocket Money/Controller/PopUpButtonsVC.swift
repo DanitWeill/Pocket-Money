@@ -56,6 +56,9 @@ class PopUpButtonsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addMoneyToUserVC = segue.destination as? AddMoneyToUserVC {
             addMoneyToUserVC.nameToPass = nameToPass
+        }
+        if let addByTimeVC = segue.destination as? AddByTimeVC {
+            addByTimeVC.nameToPass = nameToPass
             
         }
     }

@@ -49,9 +49,10 @@ class AddByTimeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        swicher.isOn = false
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-    
+      
     }
     
     @objc func tap(sender: UITapGestureRecognizer){
@@ -59,71 +60,70 @@ class AddByTimeVC: UIViewController {
         view.endEditing(true)
     }
     
-    func setConstantAmountToAdd(){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-
-        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-            "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0")])
-        { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-                //what will happen if the name and sum are nil
-            } else {
-                print("setConstantAmountToAdd successfully written!")
-                print(self.constantAmountToAddTextfield.text)
-            }
-            
-        }
-        
-    }
+//    func setConstantAmountToAdd(){
+//        guard let uid = Auth.auth().currentUser?.uid else {return}
+//
+//        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+//            "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0")
+//        ]){ err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//                //what will happen if the name and sum are nil
+//            } else {
+//                print("setConstantAmountToAdd successfully written!")
+//                print(self.constantAmountToAddTextfield.text)
+//            }
+//        }
+//
+//    }
     
-    func setDateToBegin(){
-        
-        let date = Date()
-        let calendar = Calendar.current
-        currentWeekday = calendar.component(.weekday, from: date)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy  at  HH:mm"
-        
-        
-        dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
-        dateToBeginString = formatter.string(from: dateToBeginDate)
-//        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
-        
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-
-        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-             "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
-        { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-                //what will happen if the name and sum are nil
-            } else {
-                print("setDateToBegin successfully written!")
-                
-            }
-        }
-        
-    }
-    
+//    func setDateToBegin(){
+//
+//        let date = Date()
+//        let calendar = Calendar.current
+//        currentWeekday = calendar.component(.weekday, from: date)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMM d, yyyy  at  HH:mm"
+//
+//
+//        dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
+//        dateToBeginString = formatter.string(from: dateToBeginDate)
+////        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
+//
+//        guard let uid = Auth.auth().currentUser?.uid else {return}
+//
+//        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+//             "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400)])
+//        { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//                //what will happen if the name and sum are nil
+//            } else {
+//                print("setDateToBegin successfully written!")
+//
+//            }
+//        }
+//
+//    }
     
     
-    func setAddEvery() {
-        
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-
-        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-            "add_every": addEvery])
-        { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-                //what will happen if the name and sum are nil
-            } else {
-                print("setAddEvery successfully written!")
-                
-            }
-        }
-    }
+    
+//    func setAddEvery() {
+//
+//        guard let uid = Auth.auth().currentUser?.uid else {return}
+//
+//        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+//            "add_every": addEvery])
+//        { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//                //what will happen if the name and sum are nil
+//            } else {
+//                print("setAddEvery successfully written!")
+//
+//            }
+//        }
+//    }
     
     
     @IBAction func sunButton(_ sender: UIButton) {
@@ -400,25 +400,68 @@ class AddByTimeVC: UIViewController {
     
     
     
-    
-    
-    @IBAction func saveButtonPressed(_ sender: UIButton) {
-        
-        
-        if swicher.isOn{
-            setConstantAmountToAdd()
-            setDateToBegin()
-            setAddEvery()
+    @IBAction func swicher(_ sender: UISwitch) {
+        if sender.isOn{
+            let date = Date()
+            let calendar = Calendar.current
+            currentWeekday = calendar.component(.weekday, from: date)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy  at  HH:mm"
             
+            
+            dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
+            dateToBeginString = formatter.string(from: dateToBeginDate)
+    //        let dayToBegin = calendar.component(.weekday, from: dateToBeginDate)
+            
+           
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+
+            db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+                "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
+                "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
+                "add_every": addEvery
+            ]){ err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                    //what will happen if the name and sum are nil
+                } else {
+                    print("setConstantAmountToAdd successfully written!")
+                    print(self.constantAmountToAddTextfield.text)
+                }
+            }
+            
+            
+            
+//            setConstantAmountToAdd()
+//            setDateToBegin()
+//            setAddEvery()
+            
+            showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
         } else {
             //do nothing
+            showToast(message: "Not Saved", font: .systemFont(ofSize: 12.0))
         }
-        
-        
-        
-        showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
-        
+      
     }
+    
+    
+//    @IBAction func saveButtonPressed(_ sender: UIButton) {
+//
+//
+//        if swicher = sender.isOn{
+//            setConstantAmountToAdd()
+//            setDateToBegin()
+//            setAddEvery()
+//
+//        } else {
+//            //do nothing
+//        }
+//
+//
+//
+//        showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
+//
+//    }
     
 }
 
