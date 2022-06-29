@@ -14,7 +14,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var kidPicture: UIImageView!
     @IBOutlet weak var sumLabel: UILabel!
-    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var currencyNameLabel: UILabel!
     @IBOutlet weak var addMoneyPicker: UIButton!
     
     let db = Firestore.firestore()
@@ -27,7 +27,12 @@ class UserDetailsVC: UIViewController {
     
     var kidsStringToPass: [Kid] = []
     var kidsIndex = 0
-    var currencyToPass = String()
+//    var nameToPass = String()
+    var currencySumToPass = Float()
+    var currencyNameToPass = String()
+    var rateToPass = Float()
+    
+    
     
     let addMoneyToUserVC = AddMoneyToUserVC()
     
@@ -46,7 +51,11 @@ class UserDetailsVC: UIViewController {
         importData()
         
         nameLabel.text = kidsStringToPass[kidsIndex].name
-        currencyLabel.text = currencyToPass
+        
+        currencyNameLabel.text = currencyNameToPass
+        
+      
+        
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserDetailsCell", bundle: nil), forCellReuseIdentifier: "UserDetailsCellIdentifier")
@@ -67,8 +76,9 @@ class UserDetailsVC: UIViewController {
             }else{
                 
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Int
-                    self.sumLabel.text = String(data ?? 0)
+                    let data = doc?.data()?["sum"] as? Float
+                    let sum = (data ?? 0) * self.rateToPass
+                    self.sumLabel.text = String(sum.rounded())
                 }
                 
             }
@@ -136,31 +146,29 @@ class UserDetailsVC: UIViewController {
             if let err = err{
                 print(err.localizedDescription)
             }else{
-                
+
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Int
-                    self.sumLabel.text = String(data ?? 0)
+                    let data = doc?.data()?["sum"] as? Float
+                    let sum = (data ?? 0) * self.rateToPass
+                    self.sumLabel.text = String(sum.rounded())
                 }
-                
+
             }
         }
     }
     
-    func updateCurrency(){
-        
-    }
+
     
     @objc func dateRecived(){
         importData()
     }
     
     
-
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let popUpButtonsVC = segue.destination as? PopUpButtonsVC {
             popUpButtonsVC.nameToPass = nameLabel.text!
+            popUpButtonsVC.rateToPass = rateToPass
             
         }
     }

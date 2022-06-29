@@ -13,6 +13,7 @@ class PopUpButtonsVC: UIViewController {
     @IBOutlet weak var addConstant: UIButton!
     
     var nameToPass: String = ""
+    var rateToPass = Float()
 
 
     override func viewDidLoad() {
@@ -56,10 +57,11 @@ class PopUpButtonsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addMoneyToUserVC = segue.destination as? AddMoneyToUserVC {
             addMoneyToUserVC.nameToPass = nameToPass
+            addMoneyToUserVC.rateToPass = rateToPass
+
         }
         if let addByTimeVC = segue.destination as? AddByTimeVC {
             addByTimeVC.nameToPass = nameToPass
-            
         }
     }
 }

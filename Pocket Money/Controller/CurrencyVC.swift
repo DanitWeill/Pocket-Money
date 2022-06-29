@@ -12,13 +12,13 @@ class CurrencyVC: UIViewController {
     
     @IBOutlet weak var currencyTableView: UITableView!
     
-    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
-    let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
+//    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
+//    let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
     var currencyName = "ILS"
-    var rate = Float()
-    var rateToPass = Float()
+//    var rate = Float()
+//    var rateToPass = Float()
     
-    let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    let currencyArray = ["USD","EUR","ILS","AUD", "BRL","CAD","CNY","GBP","HKD","IDR","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","ZAR"]
     
     let db = Firestore.firestore()
     
@@ -64,7 +64,7 @@ extension CurrencyVC: UITableViewDelegate, UITableViewDataSource{
         print(currencyName)
         updatedCurrencyNameInDB()
         
-        NotificationCenter.default.post(name: Notification.Name("dateUpdate"), object: nil)
+//        NotificationCenter.default.post(name: Notification.Name("dateUpdate"), object: nil)
         
         
         dismiss(animated: true, completion: nil)

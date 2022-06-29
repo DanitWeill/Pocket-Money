@@ -15,7 +15,8 @@ class AddMoneyToUserVC: UIViewController {
     @IBOutlet weak var currencyLabel: UILabel!
     
     var nameToPass: String = ""
-    
+    var rateToPass = Float()
+
     let db = Firestore.firestore()
     var dateMoneyAdded = String()
     var amountAdded = Int()
@@ -34,7 +35,7 @@ class AddMoneyToUserVC: UIViewController {
                 print(err.localizedDescription)
             }else{
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Int
+                    let data = doc?.data()?["sum"] as? Float
                 }
             }
         }
@@ -73,7 +74,7 @@ class AddMoneyToUserVC: UIViewController {
                 return nil
             }
             
-            guard let oldSum = sfDocument.data()?["sum"] as? Int else {
+            guard let oldSum = sfDocument.data()?["sum"] as? Float else {
                 let error = NSError(
                     domain: "AppErrorDomain",
                     code: -1,
@@ -86,7 +87,9 @@ class AddMoneyToUserVC: UIViewController {
             }
             
             //update sum in db
-            transaction.updateData(["sum": oldSum + self.amountAdded], forDocument: sumReference)
+            var amountAddedRate = Float(self.amountAdded) / self.rateToPass
+          
+            transaction.updateData(["sum": oldSum + Float(amountAddedRate)], forDocument: sumReference)
             return nil
         }) { (object, error) in
             if let error = error {

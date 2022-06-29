@@ -25,6 +25,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     let storage = Storage.storage().reference()
     var picturePath = String()
     var cellColor = UIColor(hexString: "#ffe747")
+    var rateToPass = Float()
+
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
@@ -160,15 +162,14 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
         if textFieldName.text != "" && textFieldSum.text != "" {
             
-            if let userName = self.textFieldName.text, let userSum = Float(self.textFieldSum.text!) {
+            if let kidName = self.textFieldName.text, let kidSum = Float(self.textFieldSum.text!) {
             let db = Firestore.firestore()
             guard let uid = Auth.auth().currentUser?.uid else {return}
 
-
-            // Add a new document in collection "users"
-            db.collection("families").document(uid).collection("kids").document(userName).setData([
-                "name": userName,
-                "sum": userSum,
+            // Add a new document in collection "families"
+            db.collection("families").document(uid).collection("kids").document(kidName).setData([
+                "name": kidName,
+                "sum": kidSum / rateToPass,
                 "cellColor": self.cellColor.htmlRGBColor,
                 "pictureURL": self.picturePath,
                 "add_every": 0,
@@ -179,8 +180,6 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
-                    print(userSum)
-                    print(userName)
                     MainVC().kids = []
                     
                     NotificationCenter.default.post(name: Notification.Name("newUserUpdate"), object: nil)
