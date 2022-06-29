@@ -64,8 +64,11 @@ class UserDetailsVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(dateRecived), name: Notification.Name("dateUpdate"), object: nil)
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(announceSumUpdate), name: Notification.Name("announceSumUpdate"), object: nil)
+        
     }
     
+  
     
     func importData(){
         guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -164,6 +167,9 @@ class UserDetailsVC: UIViewController {
     }
     
     
+    @objc func announceSumUpdate(){
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let popUpButtonsVC = segue.destination as? PopUpButtonsVC {
@@ -172,6 +178,9 @@ class UserDetailsVC: UIViewController {
             
         }
     }
+    
+    
+    
 }
 
 

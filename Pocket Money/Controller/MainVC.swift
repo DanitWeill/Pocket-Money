@@ -29,8 +29,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     var kidsIndex = Int()
     
-    //    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
-    //    let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
     var rate = Float()
     
     private var handle: AuthStateDidChangeListenerHandle?
@@ -47,20 +45,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         
         updateDefaultCurreny()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if user == nil{
-                
-                
                 
                 if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
                 {
                     self.present(vc, animated: true, completion: nil)
                 }
-                
-                
+    
             }else{
-                
-                
                 
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
@@ -76,20 +74,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 NotificationCenter.default.addObserver(self, selector: #selector(self.updateRecived), name: Notification.Name("currencyNameUpdate"), object: nil)
                 
                 
-                
-                
                 self.loadKids()
                 // stop animate
                 self.activityIndicator.stopAnimating()
                 UIApplication.shared.endIgnoringInteractionEvents()
-                
-                
             }
-            
         })
     }
-    
-    
     
     @objc func updateRecived(){
         updateDefaultCurreny()
@@ -214,6 +205,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 }
             }
         }
+//        NotificationCenter.default.post(name: Notification.Name("sumUpdate"), object: nil)
+
     }
     
 //    @objc func announceSumUpdate(){
@@ -294,7 +287,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             userDetailsVC.kidsStringToPass = kids
             userDetailsVC.kidsIndex = kidsIndex
             userDetailsVC.currencyNameToPass = currencyName
-//            userDetailsVC.currencySumToPass = sum
             userDetailsVC.rateToPass = rate
             print(kids)
         }
@@ -323,7 +315,6 @@ extension MainVC: UITableViewDataSource {
         
         cell.nameLabel.text = kids[indexPath.row].name
         cell.sumLabel.text = String(kids[indexPath.row].sum)
-        //        String(Float(kids[indexPath.row].sum) * self.rate)
         cell.color.backgroundColor = kids[indexPath.row].cellColor
         cell.userPicture.image = kids[indexPath.row].picture
         cell.currencyLabel.text = currencyName
@@ -337,7 +328,7 @@ extension MainVC: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
         performSegue(withIdentifier: "goToUserDetailsVC", sender: self)
-//        NotificationCenter.default.addObserver(self, selector: #selector(announceSumUpdate), name: Notification.Name("announceSumUpdate"), object: nil)
+
     }
     
     
